@@ -6,7 +6,7 @@
 # grazziano <gra.negocia@gmail.com>, 2016
 # Rodrigo de Almeida Sottomaior Macedo <rmsolucoeseminformatic4@gmail.com>, 2016
 # Mateus Lopes <mateus1@gmail.com>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
+# Martin Trigaux, 2016
 # falexandresilva <falexandresilva@gmail.com>, 2016
 # Manel Tinoco <maneltinoco@gmail.com>, 2016
 # Adriel Kotviski <kotviski@gmail.com>, 2016
@@ -20,18 +20,20 @@
 # Cezar José Sant Anna Junior <cezar.santanna@gmail.com>, 2016
 # Luiz Carlos de Lima <luiz.carlos@akretion.com.br>, 2016
 # Ademílson F. Tonato <apraqueisso@gmail.com>, 2016
+# Bindiya Patel <bip@openerp.com>, 2016
 # THIAGO MACÊDO <thiago95macedo@gmail.com>, 2016
 # Fábio Novais <fabionovais@aptu.com.br>, 2016
 # zimbora <alexandre.ruffer@tkobr.com>, 2016
 # Silmar <pinheirosilmar@gmail.com>, 2017
 # Raphael Rodrigues <raphael0608@gmail.com>, 2017
+# Maicon Grahl <maicongrahl@hotmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-26 08:44+0000\n"
 "PO-Revision-Date: 2017-05-26 08:44+0000\n"
-"Last-Translator: Raphael Rodrigues <raphael0608@gmail.com>, 2017\n"
+"Last-Translator: Maicon Grahl <maicongrahl@hotmail.com>, 2017\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/odoo/teams/41243/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2878,7 +2880,7 @@ msgstr "Escolher Modelo de Contabilidade"
 #: code:addons/account/static/src/js/account_reconciliation_widgets.js:1890
 #, python-format
 msgid "Choose counterpart"
-msgstr "Esolher Contrapartida"
+msgstr "Escolher Contrapartida"
 
 #. module: account
 #: model:ir.actions.act_window,help:account.action_account_bank_journal_form
@@ -10773,6 +10775,14 @@ msgstr ""
 "desconciliar as entradas de pagamento relacionados antes."
 
 #. module: account
+#: code:addons/account/models/company.py:118
+#, python-format
+msgid ""
+"You cannot change the currency of the company since some journal items "
+"already exist"
+msgstr ""
+
+#. module: account
 #: code:addons/account/models/account.py:180
 #, python-format
 msgid ""
@@ -10950,7 +10960,7 @@ msgstr "Você tem"
 #: code:addons/account/models/account_payment.py:360
 #, python-format
 msgid "You have to define a sequence for %s in your company."
-msgstr ""
+msgstr "Você precisa definir uma sequência para %s na sua empresa."
 
 #. module: account
 #: code:addons/account/wizard/account_report_general_ledger.py:21

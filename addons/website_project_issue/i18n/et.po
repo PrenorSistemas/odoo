@@ -2,12 +2,17 @@
 # This file contains the translation of the following modules:
 # * website_project_issue
 # 
+# Translators:
+# Martin Trigaux, 2017
+# Eneli Õigus <enelioigus@gmail.com>, 2017
+# Marek Pontus, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-07 08:57+0000\n"
 "PO-Revision-Date: 2016-09-07 08:57+0000\n"
+"Last-Translator: Marek Pontus, 2018\n"
 "Language-Team: Estonian (https://www.transifex.com/odoo/teams/41243/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,17 +23,17 @@ msgstr ""
 #. module: website_project_issue
 #: model:ir.ui.view,arch_db:website_project_issue.my_issues_issue
 msgid "<strong>Assigned to</strong>"
-msgstr ""
+msgstr "<strong>Määratud</strong>"
 
 #. module: website_project_issue
 #: model:ir.ui.view,arch_db:website_project_issue.my_issues_issue
 msgid "<strong>Date:</strong>"
-msgstr ""
+msgstr "<strong>Kuupäev:</strong>"
 
 #. module: website_project_issue
 #: model:ir.ui.view,arch_db:website_project_issue.my_issues_issue
 msgid "<strong>Description</strong>"
-msgstr ""
+msgstr "<strong>Kirjeldus</strong>"
 
 #. module: website_project_issue
 #: model:ir.ui.view,arch_db:website_project_issue.my_issues_issue
@@ -38,13 +43,13 @@ msgstr ""
 #. module: website_project_issue
 #: model:ir.ui.view,arch_db:website_project_issue.my_issues_issue
 msgid "<strong>Reported by</strong>"
-msgstr ""
+msgstr "<strong>Koostaja</strong>"
 
 #. module: website_project_issue
 #: code:addons/website_project_issue/controllers/main.py:36
 #, python-format
 msgid "All"
-msgstr ""
+msgstr "Kõik"
 
 #. module: website_project_issue
 #: model:ir.ui.view,arch_db:website_project_issue.my_issues
@@ -59,7 +64,7 @@ msgstr ""
 #. module: website_project_issue
 #: model:ir.ui.view,arch_db:website_project_issue.my_issues
 msgid "Description"
-msgstr ""
+msgstr "Kirjeldus"
 
 #. module: website_project_issue
 #: model:ir.ui.view,arch_db:website_project_issue.my_issues_issue
@@ -81,7 +86,7 @@ msgstr ""
 #: code:addons/website_project_issue/controllers/main.py:30
 #, python-format
 msgid "Last Stage Update"
-msgstr ""
+msgstr "Viimase etapi värskendus"
 
 #. module: website_project_issue
 #: model:ir.ui.view,arch_db:website_project_issue.my_issues_issue
@@ -92,7 +97,7 @@ msgstr ""
 #: code:addons/website_project_issue/controllers/main.py:28
 #, python-format
 msgid "Name"
-msgstr ""
+msgstr "Nimi"
 
 #. module: website_project_issue
 #: code:addons/website_project_issue/controllers/main.py:27
@@ -115,7 +120,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:website_project_issue.my_issues
 #, python-format
 msgid "Stage"
-msgstr ""
+msgstr "Tase"
 
 #. module: website_project_issue
 #: model:ir.ui.view,arch_db:website_project_issue.portal_my_home
