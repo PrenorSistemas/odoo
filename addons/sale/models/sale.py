@@ -759,9 +759,9 @@ class SaleOrderLine(models.Model):
         ], string='Invoice Status', compute='_compute_invoice_status', store=True, readonly=True, default='no')
     price_unit = fields.Float('Unit Price', required=True, digits=dp.get_precision('Product Price'), default=0.0)
 
-    price_subtotal = fields.Monetary(compute='_compute_amount', string='Subtotal', readonly=True, store=True)
-    price_tax = fields.Monetary(compute='_compute_amount', string='Taxes', readonly=True, store=True)
-    price_total = fields.Monetary(compute='_compute_amount', string='Total', readonly=True, store=True)
+    price_subtotal = fields.Monetary(compute='_compute_amount', string='Subtotal', readonly=True, store=False)
+    price_tax = fields.Monetary(compute='_compute_amount', string='Taxes', readonly=True, store=False)
+    price_total = fields.Monetary(compute='_compute_amount', string='Total', readonly=True, store=False)
 
     price_reduce = fields.Monetary(compute='_get_price_reduce', string='Price Reduce', readonly=True, store=True)
     tax_id = fields.Many2many('account.tax', string='Taxes', domain=['|', ('active', '=', False), ('active', '=', True)])
