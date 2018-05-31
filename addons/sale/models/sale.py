@@ -571,6 +571,21 @@ class SaleOrderLine(models.Model):
                 'price_subtotal': taxes['total_excluded'],
             })
 
+    @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id')
+    def _compute_amount_aux(self):
+        """
+        Compute the amounts of the SO line.
+        """
+        for line in self:
+            price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
+            taxes = line.tax_id.compute_all(price, line.order_id.currency_id, line.product_uom_qty,
+                                            product=line.product_id, partner=line.order_id.partner_shipping_id)
+            line.update({
+                'price_tax_aux': taxes['total_included'] - taxes['total_excluded'],
+                'price_total_aux': taxes['total_included'],
+                'price_subtotal_aux': taxes['total_excluded'],
+            })
+
     @api.depends('product_id.invoice_policy', 'order_id.state')
     def _compute_qty_delivered_updateable(self):
         for line in self:
@@ -763,9 +778,11 @@ class SaleOrderLine(models.Model):
     price_unit = fields.Float('Unit Price', required=True, digits=dp.get_precision('Product Price'), default=0.0)
 
     price_subtotal = fields.Monetary(compute='_compute_amount', string='Subtotal', readonly=True, store=False)
+    price_subtotal_aux = fields.Monetary(compute='_compute_amount_aux', string='Subtotal', readonly=True, store=True)
     price_tax = fields.Monetary(compute='_compute_amount', string='Taxes', readonly=True, store=False)
+    price_tax_aux = fields.Monetary(compute='_compute_amount_aux', string='Taxes', readonly=True, store=True)
     price_total = fields.Monetary(compute='_compute_amount', string='Total', readonly=True, store=False)
-    price_total_aux = fields.Monetary(compute='_compute_amount', string='Total', readonly=True, store=True)
+    price_total_aux = fields.Monetary(compute='_compute_amount_aux', string='Total', readonly=True, store=True)
 
     price_reduce = fields.Monetary(compute='_get_price_reduce', string='Price Reduce', readonly=True, store=True)
     tax_id = fields.Many2many('account.tax', string='Taxes', domain=['|', ('active', '=', False), ('active', '=', True)])
