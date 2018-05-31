@@ -53,7 +53,7 @@ class SaleReport(models.Model):
                     sum(l.qty_delivered / u.factor * u2.factor) as qty_delivered,
                     sum(l.qty_invoiced / u.factor * u2.factor) as qty_invoiced,
                     sum(l.qty_to_invoice / u.factor * u2.factor) as qty_to_invoice,
-                    sum(l.price_total / COALESCE(cr.rate, 1.0)) as price_total,
+                    sum(l.price_total_aux / COALESCE(cr.rate, 1.0)) as price_total,
                     sum(l.price_subtotal / COALESCE(cr.rate, 1.0)) as price_subtotal,
                     count(*) as nbr,
                     s.name as name,
