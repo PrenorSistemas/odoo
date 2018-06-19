@@ -149,6 +149,13 @@ msgid ""
 "%endif\n"
 "</p><p>Thank you!</p>\n"
 msgstr ""
+"\n"
+"<p>Sveiki ${object.user_id and object.user_id.name or ''},</p>\n"
+"<p>Su šia galimybe <strong>${object.name}</strong> nebuvo atlikta jokių veiksmų mažiausiai 5 dienas.</p>\n"
+"%if object.description:\n"
+"<p>Štai galimybės aprašymas : </p><p><i>${object.description}</i>\n"
+"%endif\n"
+"</p><p>Ačiū!</p>\n"
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_lead_meeting_count
@@ -185,6 +192,8 @@ msgid ""
 "<b>Drag &amp; drop opportunities</b> between columns as you progress in your"
 " sales cycle."
 msgstr ""
+"<b>Permeskite galimybes</b> tarp stulpelių kai jos progresuoja Jūsų "
+"pardavimo cikle."
 
 #. module: crm
 #. openerp-web
@@ -220,6 +229,9 @@ msgid ""
 "attached to this opportunity.</p><p class=\"mb0\">Type <i>'@'</i> to mention"
 " people - it's like cc-ing on emails.</p>"
 msgstr ""
+"<p><b>Siųskite žinutes</b> galimam klientui ir jo atsakymai automatiškai bus"
+" prikabinti prie šios galimybės.Spauskite <i>'@'</i> norėdami prijungti "
+"žmones - tai tarsi cc funkcija el. laiškuose.</p>"
 
 #. module: crm
 #: model:ir.actions.server,body_html:crm.action_email_reminder_lead
@@ -547,6 +559,10 @@ msgid ""
 "                        advice to customize screens to fit your sales process.\n"
 "                        <strong>Customizations are done by Odoo experts.</strong>"
 msgstr ""
+"<strong>Kiekvienas verslas yra skirtingas.</strong> Odoo leidžia\n"
+"                        individualizuoti kiekvieną programą ir dažniausiai\n"
+"                        verta pritaikyti programos langus prie jūsų pardavimų proceso.\n"
+"                        <strong>Individualizacijos atliekamos Odoo ekspertų.</strong>"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -570,7 +586,7 @@ msgstr ""
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
 msgid "<strong>Exercise: </strong>Try to switch the kanban to graph view"
-msgstr ""
+msgstr "Pratimas: </strong>Pabandykite pakeisti Kanban vaizdą į grafiką"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -727,6 +743,9 @@ msgid ""
 "                                To build a strong sales training program, you can use the following\n"
 "                                apps of Odoo:"
 msgstr ""
+"<strong>Mokymai<br/>\n"
+"                                Norėdami sukurti stiprią pardavimų mokymų programą, galite naudoti šias\n"
+"                               Odoo programas:"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -744,6 +763,8 @@ msgid ""
 "<strong>You</strong> understand the customer's needs and pain points, and "
 "you have a fairly good idea of his budget to spend"
 msgstr ""
+"<strong>Jūs</strong> suprantate kliento poreikius ir probleminius taškus, "
+"turite gerą jo išleidžiamo biudžeto nuovoką"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -761,6 +782,8 @@ msgid ""
 "A Python dictionary that will be evaluated to provide default values when "
 "creating new records for this alias."
 msgstr ""
+"Python žodynas, kuris bus įvertinamas numatytųjų reikšmių nustatymui, kai "
+"šiam slapyvardžiui sukuriami nauji įrašai."
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -774,6 +797,9 @@ msgid ""
 "                    be a goods, consumable or services. Choose how you want to\n"
 "                    create your products:"
 msgstr ""
+"\"Produktas\" Odoo yra kažkas, ką jūs parduodate ar perkate\n"
+"                   tai gali būti prekės, vartojimo reikmenys ar paslaugos. Pasirinkite, kaip norite\n"
+"                    sukurti savo produktus:"
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -911,6 +937,9 @@ msgid ""
 "                        process will allow you to continuously improve your\n"
 "                        sales performance."
 msgstr ""
+"Jūsų pardavimų proceso pritaikymas prie sistematiško\n"
+"proceso leis jums nuolat gerinti jūsų\n"
+"pardavimų sėkmingumą."
 
 #. module: crm
 #: code:addons/crm/wizard/base_partner_merge.py:310
@@ -1284,7 +1313,7 @@ msgstr ""
 #: code:addons/crm/static/src/js/tour.js:71
 #, python-format
 msgid "Configuration options are available in the Settings app."
-msgstr ""
+msgstr "Konfigūracijos pasirinktys pasiekiamos per nustatymų programėlę."
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
@@ -1383,7 +1412,7 @@ msgstr "Konvertuoti į pardavimų galimybę"
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_lead_message_bounce
 msgid "Counter of the number of bounced emails for this contact"
-msgstr ""
+msgstr "Šiam kontaktui nepristatytų laiškų kiekio skaičiuoklis"
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_activity_report_country_id
@@ -1674,6 +1703,8 @@ msgid ""
 "Description that will be added in the message posted for this subtype. If "
 "void, the name will be added instead."
 msgstr ""
+"Aprašymas, kuris bus pridėtas žinutėje, paskelbtoje šiam potipiui. Jei "
+"tuščia, bus pridedamas vardas."
 
 #. module: crm
 #: model:crm.lead.tag,name:crm.categ_oppor5
@@ -1933,6 +1964,9 @@ msgid ""
 "automatic subscription on a related document. The field is used to compute "
 "getattr(related_document.relation_field)."
 msgstr ""
+"Laukas, kuris naudojamas susieti susijusį modelį su potipio modeliu, kai "
+"susijusiam dokumentui naudojama automatinė prenumerata. Šis laukas taip pat "
+"naudojamas suskaičiuoti getattr(related_document.relation_field)."
 
 #. module: crm
 #. openerp-web
@@ -2554,7 +2588,7 @@ msgstr "Rašyti pastebėjimą..."
 #: model:ir.model,name:crm.model_crm_activity_log
 #: model:ir.ui.view,arch_db:crm.crm_activity_log_view_form
 msgid "Log an Activity"
-msgstr ""
+msgstr "Registruoti veiklą"
 
 #. module: crm
 #. openerp-web
@@ -2637,6 +2671,7 @@ msgstr "Vidutinis"
 #, python-format
 msgid "Meeting scheduled at '%s'<br> Subject: %s <br> Duration: %s hour(s)"
 msgstr ""
+"Susitikimas suplanuotas '%s'<br> Tema: %s <br> Trukmė: %s valanda (-os)"
 
 #. module: crm
 #. openerp-web
@@ -2765,6 +2800,11 @@ msgid ""
 "subtypes allow to precisely tune the notifications the user want to receive "
 "on its wall."
 msgstr ""
+"Žinutės potipis žinutei suteikia tikslesnį tipą, ypatingai sistemos "
+"pranešimams. Pavyzdžiui, tai gali būti pranešimas, susijęs su nauju įrašu "
+"(Naujas) ar su stadijos pasikeitimu procese (Stadijos pasikeitimas). Žinučių"
+" potipiai leidžia tiksliai nustatyti, kokius pranešimus vartotojas nori "
+"matyti savo sienoje."
 
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_activity_internal
@@ -2772,6 +2812,8 @@ msgid ""
 "Messages with internal subtypes will be visible only by employees, aka "
 "members of base_user group"
 msgstr ""
+"Žinutės su vidiniais potipiais bus matomi tik darbuotoju, t.y., base_user "
+"grupės nariams"
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_base_partner_merge_line_min_id
@@ -2798,6 +2840,8 @@ msgstr "Modelis"
 msgid ""
 "Model the subtype applies to. If False, this subtype applies to all models."
 msgstr ""
+"Modelis, kuriam taikomas šis potipis. Jei False, šis potipis taikomas "
+"visiems modeliams."
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_activity_report_view_search
@@ -3032,6 +3076,9 @@ msgid ""
 "                        Tell us how you sell and we will tell you what\n"
 "                        configuration will best fit your quotation process."
 msgstr ""
+"Odoo jums padės per kelias minutes paruošti išbaigtus ir profesionalius komercinius pasiūlymus bei kontraktus.\n"
+"Pasakykite mums, kaip jūs parduodate ir mes pasakysime\n"
+"kokia konfigūracija geriausiai tiks jūsų komerciniams pasiūlymams."
 
 #. module: crm
 #: model:ir.actions.act_window,help:crm.crm_case_form_view_salesteams_lead
@@ -3394,7 +3441,7 @@ msgstr ""
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
 msgid "Pricing &amp; Discounts"
-msgstr ""
+msgstr "Kainodara ir nuolaidos"
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_opportunity_report_priority
@@ -3404,7 +3451,7 @@ msgstr "Svarbumas"
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_stage_legend_priority
 msgid "Priority Management Explanation"
-msgstr ""
+msgstr "Pirmenybės valdymo paaiškinimas"
 
 #. module: crm
 #: model:ir.model.fields,field_description:crm.field_crm_activity_report_probability
@@ -3509,7 +3556,7 @@ msgstr "Vertinimas"
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
 msgid "Read the documentation about pricing &amp; discounts"
-msgstr ""
+msgstr "Perskaitykite dokumentaciją apie kainodarą ir nuolaidas"
 
 #. module: crm
 #. openerp-web
@@ -4065,6 +4112,8 @@ msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
 "<jobs@example.odoo.com>"
 msgstr ""
+"El. pašto slapyvardžio pavadinimas, pvz. \"darbai\", jei norite gauti "
+"<darbai@pavyzdys.odoo.com>"
 
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_lead_partner_name
@@ -4083,6 +4132,10 @@ msgid ""
 "the sender (From) address, or will use the Administrator account if no "
 "system user is found for that address."
 msgstr ""
+"Įrašų, sukuriamų gaunant laiškus šiuo vardu, šeimininkas. Jei šis laukas "
+"nėra nustatytas, sistema bandys surasti tikrąjį šeimininką pagal siuntėjo "
+"(nuo) adresą arba naudos administratoriaus paskyrą, jei tam adresui "
+"sistemoje nerandamas vartotojas."
 
 #. module: crm
 #: model:ir.ui.view,arch_db:crm.crm_planner
