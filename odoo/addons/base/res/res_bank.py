@@ -57,7 +57,7 @@ class ResPartnerBank(models.Model):
     _description = 'Bank Accounts'
     _order = 'sequence'
 
-    acc_type = fields.Char(compute='_compute_acc_type', help='Bank account type, inferred from account number')
+    acc_type = fields.Char(compute='_compute_acc_type', help='Bank account type, inferred from account number', store=True)
     acc_number = fields.Char('Account Number', required=True)
     sanitized_acc_number = fields.Char(compute='_compute_sanitized_acc_number', string='Sanitized Account Number', readonly=True, store=True)
     partner_id = fields.Many2one('res.partner', 'Account Holder', ondelete='cascade', index=True, domain=['|', ('is_company', '=', True), ('parent_id', '=', False)])
@@ -68,9 +68,9 @@ class ResPartnerBank(models.Model):
     currency_id = fields.Many2one('res.currency', string='Currency')
     company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.user.company_id, ondelete='cascade')
 
-    _sql_constraints = [
-        ('unique_number', 'unique(sanitized_acc_number, company_id)', 'Account Number must be unique'),
-    ]
+    #_sql_constraints = [
+    #    ('unique_number', 'unique(sanitized_acc_number, company_id, acc_type)', 'Account Number must be unique'),
+    #]
 
     @api.depends('acc_number')
     def _compute_sanitized_acc_number(self):
@@ -78,6 +78,7 @@ class ResPartnerBank(models.Model):
             bank.sanitized_acc_number = sanitize_account_number(bank.acc_number)
 
     @api.multi
+    @api.depends('acc_number')
     def _compute_acc_type(self):
         for bank in self:
             bank.acc_type = 'bank'
