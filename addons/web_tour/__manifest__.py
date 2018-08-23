@@ -13,11 +13,11 @@ Odoo Web tours.
     'depends': ['web'],
     'data': [
         'security/ir.model.access.csv',
-        'views/tour_templates.xml',
-        'views/tour_views.xml'
+        #'views/tour_templates.xml',
+        #'views/tour_views.xml'
     ],
     'qweb': [
-        "static/src/xml/*.xml",
+        #"static/src/xml/*.xml",
     ],
     'auto_install': True
 }
