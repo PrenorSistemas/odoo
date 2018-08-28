@@ -683,7 +683,7 @@ class Partner(models.Model, FormatAddress):
             if partner_ids:
                 return self.browse(partner_ids).name_get()
             else:
-                return []
+                return super(Partner, self).name_search(name, args, operator=operator, limit=limit)
         return super(Partner, self).name_search(name, args, operator=operator, limit=limit)
 
     @api.model

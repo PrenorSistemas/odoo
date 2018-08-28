@@ -607,5 +607,5 @@ class HrExpenseSheet(models.Model):
     @api.constrains('expense_line_ids')
     def _check_payment_mode(self):
         payment_mode = set(self.expense_line_ids.mapped('payment_mode'))
-        if len(payment_mode) > 1:
-            raise ValidationError(_('You cannot report expenses with different payment modes.'))
+        #if len(payment_mode) > 1:
+        #raise ValidationError(_('You cannot report expenses with different payment modes.'))

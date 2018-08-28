@@ -214,7 +214,7 @@ class Project(models.Model):
                 "   them or by someone of their company\n")
     doc_count = fields.Integer(compute='_compute_attached_docs_count', string="Number of documents attached")
     date_start = fields.Date(string='Start Date')
-    date = fields.Date(string='Expiration Date', index=True, track_visibility='onchange')
+    # date = fields.Date(string='Expiration Date', index=True, track_visibility='onchange')
 
     _sql_constraints = [
         ('project_date_greater', 'check(date >= date_start)', 'Error! project start-date must be lower than project end-date.')
