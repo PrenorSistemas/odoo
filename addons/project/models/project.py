@@ -543,20 +543,8 @@ class Task(models.Model):
             res['stage_id'] = (test_task.stage_id.mail_template_id, {'composition_mode': 'mass_mail'})
         return res
 
-    @api.multi
-    def _track_subtype(self, init_values):
-        self.ensure_one()
-        if 'kanban_state' in init_values and self.kanban_state == 'blocked':
-            return 'project.mt_task_blocked'
-        elif 'kanban_state' in init_values and self.kanban_state == 'done':
-            return 'project.mt_task_ready'
-        elif 'user_id' in init_values and self.user_id:  # assigned -> new
-            return 'project.mt_task_new'
-        elif 'stage_id' in init_values and self.stage_id and self.stage_id.sequence <= 1:  # start stage -> new
-            return 'project.mt_task_new'
-        elif 'stage_id' in init_values:
-            return 'project.mt_task_stage'
-        return super(Task, self)._track_subtype(init_values)
+
+
 
     @api.multi
     def _notification_recipients(self, message, groups):
