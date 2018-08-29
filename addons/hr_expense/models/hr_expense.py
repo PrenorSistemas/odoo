@@ -421,8 +421,6 @@ class HrExpenseSheet(models.Model):
                 continue
             if any(expense.employee_id != rec.employee_id for expense in expense_lines):
                 raise UserError(_("Expenses must belong to the same Employee."))
-            if any(expense.payment_mode != expense_lines[0].payment_mode for expense in expense_lines):
-                raise UserError(_("Expenses must have been paid by the same entity (Company or employee)"))
 
     @api.model
     def create(self, vals):
