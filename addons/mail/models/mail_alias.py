@@ -80,9 +80,9 @@ class Alias(models.Model):
              "- partners: only authenticated partners\n"
              "- followers: only followers of the related document or members of following channels\n")
 
-    _sql_constraints = [
-        ('alias_unique', 'UNIQUE(alias_name)', 'Unfortunately this email alias is already used, please choose a unique one')
-    ]
+    #_sql_constraints = [
+    #    ('alias_unique', 'UNIQUE(alias_name)', 'Unfortunately this email alias is already used, please choose a unique one')
+    #]
 
     @api.multi
     def _get_alias_domain(self):
