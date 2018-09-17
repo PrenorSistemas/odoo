@@ -217,7 +217,7 @@ class Project(models.Model):
     # date = fields.Date(string='Expiration Date', index=True, track_visibility='onchange')
 
     _sql_constraints = [
-        ('project_date_greater', 'check(date >= date_start)', 'Error! project start-date must be lower than project end-date.')
+        # ('project_date_greater', 'check(date >= date_start)', 'Error! project start-date must be lower than project end-date.')
     ]
 
     @api.multi
