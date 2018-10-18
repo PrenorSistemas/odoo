@@ -1,4 +1,4 @@
-odoo.define("sale_stock.tour", function (require) {
+/*odoo.define("sale_stock.tour", function (require) {
     "use strict";
 
     var tour = require('web_tour.tour');
@@ -25,4 +25,4 @@ odoo.define("sale_stock.tour", function (require) {
             }
         },
     });
-});
+});*/
