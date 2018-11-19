@@ -237,7 +237,7 @@ class Project(models.Model):
             default = {}
         self = self.with_context(active_test=False)
         if not default.get('name'):
-            default['name'] = _("%s (copy)") % (self.name)
+            default['name'] = self.name
         project = super(Project, self).copy(default)
         for follower in self.message_follower_ids:
             project.message_subscribe(partner_ids=follower.partner_id.ids, subtype_ids=follower.subtype_ids.ids)
@@ -410,7 +410,7 @@ class Task(models.Model):
         if default is None:
             default = {}
         if not default.get('name'):
-            default['name'] = _("%s (copy)") % self.name
+            default['name'] = self.name
         if 'remaining_hours' not in default:
             default['remaining_hours'] = self.planned_hours
         return super(Task, self).copy(default)
