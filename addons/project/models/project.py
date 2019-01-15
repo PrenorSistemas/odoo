@@ -533,7 +533,7 @@ class Task(models.Model):
     # ---------------------------------------------------
     # Mail gateway
     # ---------------------------------------------------
-
+    '''
     @api.multi
     def _track_template(self, tracking):
         res = super(Task, self)._track_template(tracking)
@@ -567,7 +567,7 @@ class Task(models.Model):
             })
 
         return [new_group] + groups
-
+    
     @api.model
     def message_get_reply_to(self, res_ids, default=None):
         """ Override to get the reply_to of the parent project. """
@@ -582,7 +582,7 @@ class Task(models.Model):
         # check left-part is not already an alias
         aliases = self.mapped('project_id.alias_name')
         return filter(lambda x: x.split('@')[0] not in aliases, email_list)
-
+    
     @api.model
     def message_new(self, msg, custom_values=None):
         """ Override to updates the document according to the email. """
@@ -652,7 +652,7 @@ class Task(models.Model):
             headers['X-Odoo-Tags'] = ','.join(self.tag_ids.mapped('name'))
         res['headers'] = repr(headers)
         return res
-
+    '''
 
 class AccountAnalyticAccount(models.Model):
     _inherit = 'account.analytic.account'
