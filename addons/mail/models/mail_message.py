@@ -28,7 +28,8 @@ class Message(models.Model):
     def _get_default_from(self):
         if self.env.user.email:
             return formataddr((self.env.user.name, self.env.user.email))
-        raise UserError(_("Unable to send email, please configure the sender's email address."))
+        _logger.error(_("Unable to send email, please configure the sender's email address."))
+        return ""
 
     @api.model
     def _get_default_author(self):
@@ -681,6 +682,7 @@ class Message(models.Model):
         other_ids = other_ids.difference(set(document_related_ids))
         if not other_ids:
             return
+        print "error 203"
         raise AccessError(
             _('The requested operation cannot be completed due to security restrictions. Please contact your system administrator.\n\n(Document type: %s, Operation: %s)') %
             (self._description, operation))
