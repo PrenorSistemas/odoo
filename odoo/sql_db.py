@@ -18,7 +18,7 @@ import uuid
 import psycopg2
 import psycopg2.extras
 import psycopg2.extensions
-from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT, ISOLATION_LEVEL_READ_COMMITTED, ISOLATION_LEVEL_REPEATABLE_READ
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT, ISOLATION_LEVEL_READ_COMMITTED, ISOLATION_LEVEL_REPEATABLE_READ, ISOLATION_LEVEL_READ_UNCOMMITTED
 from psycopg2.pool import PoolError
 
 psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
@@ -328,24 +328,8 @@ class Cursor(object):
 
     @check
     def autocommit(self, on):
-        if on:
-            isolation_level = ISOLATION_LEVEL_AUTOCOMMIT
-        else:
-            # If a serializable cursor was requested, we
-            # use the appropriate PotsgreSQL isolation level
-            # that maps to snaphsot isolation.
-            # For all supported PostgreSQL versions (8.3-9.x),
-            # this is currently the ISOLATION_REPEATABLE_READ.
-            # See also the docstring of this class.
-            # NOTE: up to psycopg 2.4.2, repeatable read
-            #       is remapped to serializable before being
-            #       sent to the database, so it is in fact
-            #       unavailable for use with pg 9.1.
-            isolation_level = \
-                ISOLATION_LEVEL_REPEATABLE_READ \
-                if self._serialized \
-                else ISOLATION_LEVEL_READ_COMMITTED
-        self._cnx.set_isolation_level(isolation_level)
+        self._cnx.set_isolation_level(ISOLATION_LEVEL_READ_UNCOMMITTED)
+
 
     @check
     def after(self, event, func):
