@@ -484,7 +484,7 @@ var ListView = View.extend({
             }
             record.trigger('change', record);
 
-            /* When a record is reloaded, there is a rendering lag because of the addition/suppression of
+            /* When a record is reloaded, there is a rendering lag because of the addition/suppression of 
             a table row. Since the list view editable need to wait for the end of this rendering lag before
             computing the position of the editable fields, a 100ms delay is added. */
             var def = $.Deferred();
@@ -908,7 +908,7 @@ ListView.List = Class.extend({
      *
      * @constructs instance.web.ListView.List
      * @extends instance.web.Class
-     *
+     * 
      * @param {Object} opts display options, identical to those of :js:class:`instance.web.ListView`
      */
     init: function (group, opts) {
@@ -1827,7 +1827,7 @@ var MetaColumn = Column.extend({
     }
 });
 // to do: do this in a better way (communicate with view_list_editable)
-ListView.MetaColumn = MetaColumn;
+ListView.MetaColumn = MetaColumn;  
 
 var ColumnButton = Column.extend({
     /**
