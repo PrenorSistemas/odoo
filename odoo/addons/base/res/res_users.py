@@ -444,6 +444,8 @@ class Users(models.Model):
     @api.model
     def check_credentials(self, password):
         """ Override this method to plug additional authentication methods"""
+        if not password:
+            raise AccessDenied()
         user = self.sudo().search([('id', '=', self._uid), ('password', '=', password)])
         if not user:
             raise AccessDenied()
@@ -655,8 +657,26 @@ class GroupsImplied(models.Model):
         if values.get('users') or values.get('implied_ids'):
             # add all implied groups (to all users of each group)
             for group in self:
-                vals = {'users': zip(repeat(4), group.with_context(active_test=False).users.ids)}
-                super(GroupsImplied, group.trans_implied_ids).write(vals)
+                self._cr.execute("""
+                    WITH RECURSIVE group_imply(gid, hid) AS (
+                        SELECT gid, hid
+                          FROM res_groups_implied_rel
+                         UNION
+                        SELECT i.gid, r.hid
+                          FROM res_groups_implied_rel r
+                          JOIN group_imply i ON (i.hid = r.gid)
+                    )
+                    INSERT INTO res_groups_users_rel (gid, uid)
+                         SELECT i.hid, r.uid
+                           FROM group_imply i, res_groups_users_rel r
+                          WHERE r.gid = i.gid
+                            AND i.gid = %(gid)s
+                         EXCEPT
+                         SELECT r.gid, r.uid
+                           FROM res_groups_users_rel r
+                           JOIN group_imply i ON (r.gid = i.hid)
+                          WHERE i.gid = %(gid)s
+                """, dict(gid=group.id))
         return res
 
 
@@ -833,9 +853,9 @@ class UsersView(models.Model):
         group_multi_company = self.env.ref('base.group_multi_company', False)
         if group_multi_company and 'company_ids' in values:
             if len(user.company_ids) <= 1 and user.id in group_multi_company.users.ids:
-                group_multi_company.write({'users': [(3, user.id)]})
+                user.write({'groups_id': [(3, group_multi_company.id)]})
             elif len(user.company_ids) > 1 and user.id not in group_multi_company.users.ids:
-                group_multi_company.write({'users': [(4, user.id)]})
+                user.write({'groups_id': [(4, group_multi_company.id)]})
         return user
 
     @api.multi
@@ -846,9 +866,9 @@ class UsersView(models.Model):
         if group_multi_company and 'company_ids' in values:
             for user in self:
                 if len(user.company_ids) <= 1 and user.id in group_multi_company.users.ids:
-                    group_multi_company.write({'users': [(3, user.id)]})
+                    user.write({'groups_id': [(3, group_multi_company.id)]})
                 elif len(user.company_ids) > 1 and user.id not in group_multi_company.users.ids:
-                    group_multi_company.write({'users': [(4, user.id)]})
+                    user.write({'groups_id': [(4, group_multi_company.id)]})
         return res
 
     def _remove_reified_groups(self, values):
@@ -921,9 +941,12 @@ class UsersView(models.Model):
         # add reified groups fields
         for app, kind, gs in self.env['res.groups'].sudo().get_groups_by_application():
             if kind == 'selection':
+                field_name = name_selection_groups(gs.ids)
+                if allfields and field_name not in allfields:
+                    continue
                 # selection group field
                 tips = ['%s: %s' % (g.name, g.comment) for g in gs if g.comment]
-                res[name_selection_groups(gs.ids)] = {
+                res[field_name] = {
                     'type': 'selection',
                     'string': app.name or _('Other'),
                     'selection': [(False, '')] + [(g.id, g.name) for g in gs],
@@ -934,7 +957,10 @@ class UsersView(models.Model):
             else:
                 # boolean group fields
                 for g in gs:
-                    res[name_boolean_group(g.id)] = {
+                    field_name = name_boolean_group(g.id)
+                    if allfields and field_name not in allfields:
+                        continue
+                    res[field_name] = {
                         'type': 'boolean',
                         'string': g.name,
                         'help': g.comment,

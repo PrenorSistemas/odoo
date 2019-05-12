@@ -5,6 +5,7 @@ from lxml import etree, html
 import re
 import traceback
 from itertools import count
+from psycopg2.extensions import TransactionRollbackError
 from textwrap import dedent
 import werkzeug
 from werkzeug.utils import escape as _escape
@@ -18,6 +19,8 @@ except ImportError:
     astor = None
 
 import logging
+
+from odoo.tools.parse_version import parse_version
 
 unsafe_eval = eval
 
@@ -145,7 +148,7 @@ class QWebException(Exception):
         return str(self)
 
 # Avoid DeprecationWarning while still remaining compatible with werkzeug pre-0.9
-escape = (lambda text: _escape(text, quote=True)) if getattr(werkzeug, '__version__', '0.0') < '0.9.0' else _escape
+escape = (lambda text: _escape(text, quote=True)) if parse_version(getattr(werkzeug, '__version__', '0.0')) < parse_version('0.9.0') else _escape
 
 def unicodifier(val):
     if val is None or val is False:
@@ -313,7 +316,7 @@ class QWeb(object):
             values = dict(self.default_values(), **values)
             try:
                 return compiled(self, append, values, options, log)
-            except QWebException, e:
+            except (QWebException, TransactionRollbackError) as e:
                 raise e
             except Exception, e:
                 path = log['last_path_node']

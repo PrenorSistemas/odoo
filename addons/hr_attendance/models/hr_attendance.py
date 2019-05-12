@@ -84,7 +84,7 @@ class HrAttendance(models.Model):
                     ('employee_id', '=', attendance.employee_id.id),
                     ('check_out', '=', False),
                     ('id', '!=', attendance.id),
-                ])
+                ], order='check_in desc', limit=1)
                 if no_check_out_attendances:
                     for x in self:
                         x.check_out = attendance.check_in

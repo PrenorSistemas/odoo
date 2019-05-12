@@ -4,6 +4,7 @@
 from odoo import api, fields, models, _
 from odoo.addons import decimal_precision as dp
 from odoo.exceptions import UserError
+from odoo.osv import expression
 from odoo.tools.float_utils import float_round
 from datetime import datetime
 import operator as py_operator
@@ -262,7 +263,9 @@ class Product(models.Model):
 
         # TODO: Still optimization possible when searching virtual quantities
         ids = []
-        for product in self.search([]):
+        # Order the search on `id` to prevent the default order on the product name which slows
+        # down the search because of the join on the translation table to get the translated names.
+        for product in self.search([], order='id'):
             if OPERATORS[operator](product[field], value):
                 ids.append(product.id)
         return [('id', 'in', ids)]
@@ -367,6 +370,15 @@ class Product(models.Model):
     @api.multi
     def action_view_routes(self):
         return self.mapped('product_tmpl_id').action_view_routes()
+
+    @api.model
+    def search(self, args, offset=0, limit=None, order=None, count=False):
+        # ONLY FOR 10.0 UP TO SAAS-15
+        # ignore dummy fields used for search context²
+        for index in range(len(args or [])):
+            if args[index][0] in ('location_id', 'warehouse_id'):
+                args[index] = expression.TRUE_LEAF
+        return super(Product, self).search(args, offset=offset, limit=limit, order=order, count=count)
 
     @api.multi
     def write(self, values):
@@ -502,6 +514,15 @@ class ProductTemplate(models.Model):
     @api.onchange('tracking')
     def onchange_tracking(self):
         return self.mapped('product_variant_ids').onchange_tracking()
+
+    @api.model
+    def search(self, args, offset=0, limit=None, order=None, count=False):
+        # ONLY FOR 10.0 UP TO SAAS-15
+        # ignore dummy fields used for search context
+        for index in range(len(args or [])):
+            if args[index][0] in ('location_id', 'warehouse_id'):
+                args[index] = expression.TRUE_LEAF
+        return super(ProductTemplate, self).search(args, offset=offset, limit=limit, order=order, count=count)
 
     @api.multi
     def write(self, vals):

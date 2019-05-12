@@ -4,31 +4,32 @@
 # 
 # Translators:
 # lam nguyen <lamev.inc@gmail.com>, 2016
-# Martin Trigaux, 2016
-# fanha99 <fanha99@hotmail.com>, 2016
-# son dang <son.dang@doda100.com>, 2016
-# Ly The Thanh <lythanh24@gmail.com>, 2016
-# Phạm Lân <phamquanglan@gmail.com>, 2016
 # Thong Dong <thongdong7@gmail.com>, 2016
 # Hoang Loc Le Huu <loclhh@gmail.com>, 2016
 # Duy Pham <phamduy1812@gmail.com>, 2016
 # PHAM QUOC MY <mypham2802@gmail.com>, 2016
+# Ly The Thanh <lythanh24@gmail.com>, 2016
+# Phạm Lân <phamquanglan@gmail.com>, 2016
+# son dang <son.dang@doda100.com>, 2016
 # Su Pham Nghiep Vu <nghiepvusupham58@gmail.com>, 2017
 # trieu le <trieu.lth@gmail.com>, 2017
 # file aio <fileaio@gmail.com>, 2017
-# thanh nguyen <thanhnguyen.icsc@gmail.com>, 2017
 # Thang Duong Bao <nothingctrl@gmail.com>, 2017
+# Martin Trigaux, 2017
 # Duc Dao <blakice12@gmail.com>, 2017
-# Dang Hanh <hanh.dtm@komit-consulting.com>, 2017
+# Dang Hanh <hanh.dtm@komit-consulting.com>, 2018
 # Tri Bui <tribd@trobz.com>, 2018
-# Duy BQ <duybq86@gmail.com>, 2018
+# fanha99 <fanha99@hotmail.com>, 2018
+# Nancy Momoland <thanhnguyen.icsc@gmail.com>, 2018
+# Duy BQ <duybq86@gmail.com>, 2019
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-23 13:26+0000\n"
-"PO-Revision-Date: 2017-06-23 13:26+0000\n"
-"Last-Translator: Duy BQ <duybq86@gmail.com>, 2018\n"
+"PO-Revision-Date: 2016-09-07 09:29+0000\n"
+"Last-Translator: Duy BQ <duybq86@gmail.com>, 2019\n"
 "Language-Team: Vietnamese (https://www.transifex.com/odoo/teams/41243/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -262,6 +263,11 @@ msgid ""
 "                                        <span class=\"small\">Recommended if &gt;100 products</span>\n"
 "                                    </span>"
 msgstr ""
+"<span class=\"panel-title\">\n"
+"                                        <span class=\"fa\" data-icon=\"&#57408;\"/>\n"
+"                                        <strong>Nhập 1 file</strong><br/>\n"
+"                                        <span class=\"small\">Đề xuất dùng nếu &gt;100 sản phẩm</span>\n"
+"                                    </span>"
 
 #. module: stock
 #: model:ir.ui.view,arch_db:stock.inventory_planner
@@ -292,6 +298,11 @@ msgid ""
 "                                        <span class=\"small\">Recommended if &lt;100 products</span>\n"
 "                                    </span>"
 msgstr ""
+"<span class=\"panel-title\">\n"
+"                                        <span class=\"fa\" data-icon=\"&#57440;\"/>\n"
+"                                        <strong> Tạo bằng tay</strong><br/>\n"
+"                                        <span class=\"small\">Đề xuất dùng nếu &lt;100 sản phẩm</span>\n"
+"                                    </span>"
 
 #. module: stock
 #: model:ir.ui.view,arch_db:stock.inventory_planner
@@ -725,7 +736,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:stock.view_picking_form
 msgid ""
 "Add an internal note that will be printed on the Picking Operations sheet"
-msgstr ""
+msgstr "Thêm một ghi chú nội bộ sẽ được in trên bảng Hoạt động lấy hàng"
 
 #. module: stock
 #: model:ir.ui.view,arch_db:stock.view_picking_form
@@ -858,6 +869,8 @@ msgstr "Cho phép bạn lựa chọn và duy trì đơn vị tính khác nhau tr
 #: selection:stock.config.settings,group_warning_stock:0
 msgid "An informative or blocking warning can be set on a partner"
 msgstr ""
+"Một cảnh báo hoặc một thông báo phong toả/ngăn chặn có thể được thiết lập "
+"cho từng đối tác"
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_quant_package_ancestor_ids
@@ -1751,7 +1764,7 @@ msgstr "GIAO HÀNG KHÔNG THANH TOÁN"
 #. module: stock
 #: model:stock.incoterms,name:stock.incoterm_DEQ
 msgid "DELIVERED EX QUAY"
-msgstr ""
+msgstr "DELIVERED EX QUAY"
 
 #. module: stock
 #: model:stock.incoterms,name:stock.incoterm_DES
@@ -2234,12 +2247,12 @@ msgstr "Dịch chuyển dự thảo"
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_config_settings_module_stock_dropshipping
 msgid "Dropshipping"
-msgstr ""
+msgstr "Vận chuyển giao hàng"
 
 #. module: stock
 #: model:stock.incoterms,name:stock.incoterm_EXW
 msgid "EX WORKS"
-msgstr ""
+msgstr "EX WORKS"
 
 #. module: stock
 #: model:ir.ui.view,arch_db:stock.inventory_planner
@@ -2453,7 +2466,7 @@ msgstr "Cổng B"
 #. module: stock
 #: model:stock.location,name:stock.stock_location_5
 msgid "Generic IT Vendors"
-msgstr ""
+msgstr "Nhà cung cấp IT chung"
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_fixed_putaway_strat_sequence
@@ -2461,6 +2474,8 @@ msgid ""
 "Give to the more specialized category, a higher priority to have them in top"
 " of the list."
 msgstr ""
+"Cung cấp cho các thể loại chuyên ngành hơn, một ưu tiên cao hơn để có chúng "
+"ở đầu danh sách."
 
 #. module: stock
 #: model:ir.ui.view,arch_db:stock.stock_location_path_filter
@@ -2517,7 +2532,7 @@ msgstr ""
 #. module: stock
 #: model:stock.inventory.line,product_name:stock.stock_inventory_line_9
 msgid "HDD SH-1"
-msgstr ""
+msgstr "HDD SH-1"
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_picking_pack_operation_exist
@@ -2664,6 +2679,11 @@ msgid ""
 "ice cream shops, convenience stores, and milk bars, and in individual "
 "servings from small carts or vans at public events."
 msgstr ""
+"Kem có thể được sản xuất hàng loạt và do đó có sẵn rộng rãi trong các bộ "
+"phận phát triển của thế giới. Kem có thể được mua trong thùng lớn (thùng và "
+"squrounds) từ siêu thị và cửa hàng tạp hóa, với số lượng nhỏ hơn từ các cửa "
+"hàng kem, cửa hàng tiện lợi và thanh sữa và trong các phần ăn cá nhân từ xe "
+"nhỏ hoặc xe tải tại các sự kiện công cộng."
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_quant_name
@@ -2686,6 +2706,9 @@ msgid ""
 "If checked, this shows the packs to be moved as a whole in the Operations "
 "tab all the time, even if there was no entire pack reserved."
 msgstr ""
+"Nếu được chọn, điều này cho thấy các gói được di chuyển như một toàn bộ "
+"trong tab Hoạt động mọi lúc, ngay cả khi không có toàn bộ gói được đặt "
+"trước."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_location_path_propagate
@@ -2730,6 +2753,8 @@ msgid ""
 "If the active field is set to False, it will allow you to hide the "
 "orderpoint without removing it."
 msgstr ""
+"Nếu trường hiện hoạt được đặt thành Sai, nó sẽ cho phép bạn ẩn điểm đặt hàng"
+" mà không xóa nó."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_location_route_active
@@ -3263,7 +3288,7 @@ msgstr ""
 #: model:ir.model.fields,help:stock.field_stock_move_product_packaging
 msgid ""
 "It specifies attributes of packaging like type, quantity of packaging,etc."
-msgstr ""
+msgstr "Nó chỉ định các thuộc tính của bao bì như loại, số lượng bao bì, v.v."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_move_type
@@ -3424,6 +3449,7 @@ msgstr "Loại cần"
 #: model:ir.model.fields,help:stock.field_stock_location_route_company_id
 msgid "Leave this field empty if this route is shared between all companies"
 msgstr ""
+"Để trống trường này nếu tuyến đường này được chia sẻ giữa tất cả các công ty"
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_location_parent_left
@@ -3547,7 +3573,7 @@ msgstr "Các địa điểm"
 #: model:ir.ui.view,arch_db:stock.product_category_form_view_inherit
 #: model:ir.ui.view,arch_db:stock.view_location_form
 msgid "Logistics"
-msgstr ""
+msgstr "Tuyến hậu cần"
 
 #. module: stock
 #: code:addons/stock/models/barcode.py:13
@@ -5810,6 +5836,8 @@ msgid ""
 "Set a specific removal strategy that will be used regardless of the source "
 "location for this product category"
 msgstr ""
+"Đặt chiến lược xuất cụ thể sẽ được sử dụng bất kể vị trí nguồn cho danh mục "
+"sản phẩm này"
 
 #. module: stock
 #: selection:stock.config.settings,module_stock_calendar:0
@@ -5978,18 +6006,19 @@ msgstr ""
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_inventory_package_id
 msgid "Specify Pack to focus your inventory on a particular Pack."
-msgstr ""
+msgstr "Chỉ định Gói để tập trung kho của bạn vào một Gói cụ thể."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_inventory_category_id
 msgid ""
 "Specify Product Category to focus your inventory on a particular Category."
 msgstr ""
+"Chỉ định Danh mục sản phẩm để tập trung kho của bạn vào một Danh mục cụ thể."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_inventory_product_id
 msgid "Specify Product to focus your inventory on a particular Product."
-msgstr ""
+msgstr "Chỉ định Sản phẩm để tập trung kho của bạn vào một Sản phẩm cụ thể."
 
 #. module: stock
 #: model:ir.ui.view,arch_db:stock.view_pack_operation_details_form_save
@@ -6207,6 +6236,8 @@ msgid ""
 "Technical field used to depict a restriction on the ownership of quants to "
 "consider when marking this move as 'done'"
 msgstr ""
+"Trường kỹ thuật được sử dụng để mô tả một hạn chế về quyền sở hữu của người "
+"thuê để xem xét khi đánh dấu bước đi này là 'hoàn tất'"
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_quant_negative_dest_location_id
@@ -6317,7 +6348,7 @@ msgstr ""
 msgid ""
 "The default resupply warehouse should be different than the warehouse "
 "itself!"
-msgstr ""
+msgstr "Kho dự trữ mặc định phải khác với kho của chính nó!"
 
 #. module: stock
 #: code:addons/stock/models/stock_picking.py:517
@@ -6595,6 +6626,12 @@ msgid ""
 "this quantity on assigned moves affects the product reservation, and should "
 "be done with care."
 msgstr ""
+"Đây là số lượng của sản phẩm từ một điểm kho của view. Dùng chuyển đến trạng"
+" thái 'Hoàn tất', đây là số lượng của sản phẩm mà đã được chuyển thực tế. "
+"Với những dịch chuyển khác, đây là số lượng kế hoạch cần chuyển. Giảm số "
+"lượng này không tạo ra một giao dịch trả hàng. Thay đổi số lượng này trên "
+"các di chuyển được chỉ định ảnh hưởng đến việc đặt sản phẩm và nên được thực"
+" hiện cẩn thận."
 
 #. module: stock
 #: model:ir.actions.act_window,help:stock.stock_move_action
@@ -7291,6 +7328,10 @@ msgid ""
 " can be overridden by the routes on the Product/Product Categories or by the"
 " Preferred Routes on the Procurement"
 msgstr ""
+"Khi một nhà kho được chọn cho tuyến đường này, tuyến đường này sẽ được xem "
+"là tuyến đường mặc định khi các sản phẩm đi qua nhà kho này. Hành vi này có "
+"thể bị ghi đè bởi các tuyến đường trên Danh mục sản phẩm / sản phẩm hoặc "
+"bằng các Tuyến đường ưa thích trên Mua sắm"
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_location_route_product_selectable
@@ -7481,7 +7522,7 @@ msgstr ""
 #: code:addons/stock/models/stock_inventory.py:103
 #, python-format
 msgid "You cannot delete a validated inventory adjustement."
-msgstr ""
+msgstr "Bạn không thể xóa một điều chỉnh hàng tồn kho được xác nhận."
 
 #. module: stock
 #: code:addons/stock/models/stock_inventory.py:374
