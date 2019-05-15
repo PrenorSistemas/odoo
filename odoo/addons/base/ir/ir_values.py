@@ -414,7 +414,7 @@ class IrValues(models.Model):
                     field: action._fields[field].convert_to_read(action[field], action)
                     for field in fields
                 }
-                if action._name in ('ir.actions.report.xml', 'ir.actions.act_window'):
+                if action._name in ('ir.actions.report.xml', 'ir.actions.act_window', 'ir.actions.server'):
                     if action.groups_id and not action.groups_id & self.env.user.groups_id:
                         if name == 'Menuitem':
                             raise AccessError(_('You do not have the permission to perform this operation!!!'))
