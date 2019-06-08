@@ -55,6 +55,7 @@ class HrAttendance(models.Model):
                 if attendance.check_out < attendance.check_in:
                     raise exceptions.ValidationError(_('"Check Out" time cannot be earlier than "Check In" time.'))
 
+    '''
     @api.constrains('check_in', 'check_out', 'employee_id')
     def _check_validity(self):
         """ Verifies the validity of the attendance record compared to the others from the same employee.
@@ -106,6 +107,7 @@ class HrAttendance(models.Model):
                     #    'empl_name': attendance.employee_id.name_related,
                     #    'datetime': fields.Datetime.to_string(fields.Datetime.context_timestamp(self, fields.Datetime.from_string(last_attendance_before_check_out.check_in))),
                     #})
+    '''
 
     @api.multi
     def copy(self):
