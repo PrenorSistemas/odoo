@@ -256,14 +256,17 @@ class Holidays(models.Model):
             leave_days = holiday.holiday_status_id.get_days(holiday.employee_id.id)[holiday.holiday_status_id.id]
             if float_compare(leave_days['remaining_leaves'], 0, precision_digits=2) == -1 or \
               float_compare(leave_days['virtual_remaining_leaves'], 0, precision_digits=2) == -1:
-                raise ValidationError(_('The number of remaining leaves is not sufficient for this leave type.\n'
-                                        'Please verify also the leaves waiting for validation.'))
+                pass
+                # TODO cesa1 follow me
+                #raise ValidationError(_('The number of remaining leaves is not sufficient for this leave type.\n'
+                #                        'Please verify also the leaves waiting for validation.'))
 
     _sql_constraints = [
         ('type_value', "CHECK( (holiday_type='employee' AND employee_id IS NOT NULL) or (holiday_type='category' AND category_id IS NOT NULL))",
          "The employee or employee category of this request is missing. Please make sure that your user login is linked to an employee."),
         ('date_check2', "CHECK ( (type='add') OR (date_from <= date_to))", "The start date must be anterior to the end date."),
-        ('date_check', "CHECK ( number_of_days_temp >= 0 )", "The number of days must be greater than 0."),
+        # TODO cesa1 follow me
+        # ('date_check', "CHECK ( number_of_days_temp >= 0 )", "The number of days must be greater than 0."),
     ]
 
     @api.onchange('holiday_type')
