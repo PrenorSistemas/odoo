@@ -187,7 +187,8 @@
                     <field name="department_id" invisible="1"/>
                     <field name="type"/>
                     <field name="name"/>
-                    <field name="number_of_days" string="Number of Days" sum="Remaining Days"/>
+                    <field name="number_of_days" string="Días solicitados" sum="Días solicitados"/>
+                    <field name="number_of_days_vista" string="Días aprobados" sum="Días restantes"/>
                     <field name="date_from"/>
                     <field name="date_to"/>
                     <field name="holiday_status_id"/>
