@@ -189,6 +189,7 @@ class Holidays(models.Model):
     number_of_days_temp = fields.Float('Allocation', readonly=True, copy=False,
         states={'draft': [('readonly', False)], 'confirm': [('readonly', False)]})
     number_of_days = fields.Float('Number of Days', compute='_compute_number_of_days', store=True)
+    number_of_days_vista = fields.Float('Number of Days', compute='_compute_number_of_days_vista', store=False)
     meeting_id = fields.Many2one('calendar.event', string='Meeting')
     type = fields.Selection([
             ('remove', 'Leave Request'),
@@ -221,7 +222,15 @@ class Holidays(models.Model):
                 holiday.number_of_days = -holiday.number_of_days_temp
             else:
                 holiday.number_of_days = holiday.number_of_days_temp
-
+    @api.multi
+    @api.depends('number_of_days', 'state')
+    def _compute_number_of_days_vista(self):
+        for holiday in self:
+            if holiday.state == 'refuse':
+                holiday.number_of_days_vista = 0
+            else:
+                holiday.number_of_days_vista = holiday.number_of_days
+                
     @api.multi
     def _compute_can_reset(self):
         """ User can reset a leave request if it is its own leave request
