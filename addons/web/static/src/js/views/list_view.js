@@ -985,12 +985,7 @@ ListView.List = Class.extend({
             })
             .delegate('td.o_list_record_selector', 'click', function (e) {
                 e.stopPropagation();
-                try {
-                var selection = self.get_selection();}
-                catch(err) {
-                    console.error("Error no declarado");
-                    return
-                            }
+                var selection = self.get_selection();
                 var checked = $(e.currentTarget).find('input').prop('checked');
                 $(self).trigger(
                         'selected', [selection.ids, selection.records, ! checked]);
@@ -1380,12 +1375,7 @@ ListView.Groups = Class.extend({
                                 .addClass('fa-caret-right');
                         child.close();
                         // force recompute the selection as closing group reset properties
-                        try {
-                            var selection = self.get_selection();}
-                            catch(err) {
-                                console.error("Error no declarado");
-                                return
-                                        }
+                        var selection = self.get_selection();
                         $(self).trigger('selected', [selection.ids, this.records]);
                     }
                 });
@@ -1469,12 +1459,7 @@ ListView.Groups = Class.extend({
              self = this;
         $(child).bind('selected', function (e, _0, _1, deselected) {
             // can have selections spanning multiple links
-            try {
-                var selection = self.get_selection();}
-                catch(err) {
-                    console.error("Error no declarado");
-                    return
-                            }
+            var selection = self.get_selection();
             $this.trigger(e, [selection.ids, selection.records, deselected]);
         }).bind(this.passthrough_events, function (e) {
             // additional positional parameters are provided to trigger as an
