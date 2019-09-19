@@ -11,8 +11,6 @@
                 <h1>Welcome to <t t-esc="widget.company_name"/></h1>
                 <img t-attf-src="{{widget.company_image_url}}" alt="Company Logo"/>
                 <h2>Scan your badge</h2>
-                <h4>or</h4>
-                <button class="o_hr_attendance_button_employees btn btn-primary btn-lg">Select Employee</button>
             </div>
             <div class="o_hr_attendance_clock"></div>
         </div>
