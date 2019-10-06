@@ -52,7 +52,7 @@ class IrAttachment(models.Model):
     @api.model
     def _filestore2(self):
         import socket
-        if socket.gethostname() in ['preweb', 'preweb2']:
+        if False and socket.gethostname() in ['preweb', 'preweb2']:
             return os.path.join('/repo2/share/', 'filestore', self._cr.dbname)
         else:
             return config.filestore(self._cr.dbname)
