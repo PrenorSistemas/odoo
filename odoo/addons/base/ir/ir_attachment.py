@@ -216,7 +216,7 @@ class IrAttachment(models.Model):
         for attach in self:
             if attach.store_fname:
                 if attach.res_model in ['ir.ui.view' , 'ir.ui.menu', 'ir.attachment', 'res.country', 'payment.acquirer']:
-                    attach.datas = self._file_read_2(attach.store_fname, bin_size)
+                    attach.datas = self._file_read2(attach.store_fname, bin_size)
                 else:
                     attach.datas = self._file_read(attach.store_fname, bin_size)
             else:
