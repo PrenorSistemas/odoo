@@ -52,7 +52,7 @@ class IrAttachment(models.Model):
     @api.model
     def _filestore2(self):
         import socket
-        if False and socket.gethostname() in ['preweb', 'preweb2']:
+        if socket.gethostname() in ['preweb', 'preweb2']:
             return os.path.join('/repo2/share/', 'filestore', self._cr.dbname)
         else:
             return config.filestore(self._cr.dbname)
@@ -106,7 +106,9 @@ class IrAttachment(models.Model):
 
     @api.model
     def _file_read(self, fname, bin_size=False):
-        full_path = self._full_path(fname)
+        full_path = self._full_path2(fname)
+        if not os.path.exists(full_path):
+            full_path = self._full_path(fname)
         r = ''
         try:
             if bin_size:
@@ -215,10 +217,8 @@ class IrAttachment(models.Model):
         bin_size = self._context.get('bin_size')
         for attach in self:
             if attach.store_fname:
-                if attach.res_model in ['ir.ui.view' , 'ir.ui.menu', 'ir.attachment', 'res.country', 'payment.acquirer']:
-                    attach.datas = self._file_read2(attach.store_fname, bin_size)
-                else:
-                    attach.datas = self._file_read(attach.store_fname, bin_size)
+                attach.datas = self._file_read(attach.store_fname, bin_size)
+
             else:
                 attach.datas = attach.db_datas
 
