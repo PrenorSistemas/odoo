@@ -631,7 +631,10 @@ class Field(object):
         for record in records:
             other, field = self.traverse_related(record)
             if other:
-                other[field.name] = record_value[record]
+                try:
+                    other[field.name] = record_value[record]
+                except:
+                    print "ERROR"
 
     def _search_related(self, records, operator, value):
         """ Determine the domain to search on field ``self``. """
