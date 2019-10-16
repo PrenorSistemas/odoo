@@ -5617,7 +5617,12 @@ class RecordCache(MutableMapping):
         """ Return the cached value of ``field`` for `records[0]`. """
         if isinstance(field, basestring):
             field = self._recs._fields[field]
-        value = self._recs.env.cache[field][self._recs.id]
+        try:
+            value = self._recs.env.cache[field][self._recs.id]
+        except:
+            print self
+            value = self._recs.env.cache[field][self._recs.id]
+
         return value.get() if isinstance(value, SpecialValue) else value
 
     def __setitem__(self, field, value):
