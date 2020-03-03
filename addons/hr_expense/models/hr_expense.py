@@ -600,8 +600,8 @@ class HrExpenseSheet(models.Model):
         # DO NOT FORWARD-PORT! ONLY FOR v10
         positive_lines = any([l.total_amount > 0 for l in self.expense_line_ids])
         negative_lines = any([l.total_amount < 0 for l in self.expense_line_ids])
-        if positive_lines and negative_lines:
-            raise ValidationError(_('You cannot have a positive and negative amounts on the same expense report.'))
+        #if positive_lines and negative_lines:
+        #    raise ValidationError(_('You cannot have a positive and negative amounts on the same expense report.'))
 
     @api.one
     @api.constrains('expense_line_ids', 'employee_id')
