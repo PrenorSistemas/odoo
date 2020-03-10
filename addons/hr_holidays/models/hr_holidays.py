@@ -326,9 +326,9 @@ class Holidays(models.Model):
             initial = datetime.strptime(self.date_from, "%Y-%m-%d %H:%M:%S")
             date_to = datetime.strptime(self.date_to, "%Y-%m-%d %H:%M:%S")
             while (initial <= date_to):
-                if int(initial.strftime('%w'))in [0, 6]:
-                    initial = initial + timedelta(days=1)
-                    continue
+                #if int(initial.strftime('%w'))in [0, 6]:
+                #    initial = initial + timedelta(days=1)
+                #    continue
                 if self.env['hr.holidays.public'].is_public_holiday(initial, employee_id=self.employee_id.id):
                     vacations += 1
                 initial = initial + timedelta(days=1)
