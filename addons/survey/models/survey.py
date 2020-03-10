@@ -156,7 +156,7 @@ class Survey(models.Model):
         if current_page_index == len(pages) - 1 and not go_back:
             return (None, -1, False)
         # Let's get back, baby!
-        elif go_back:
+        elif go_back and survey.users_can_go_back:
             return (pages[current_page_index - 1][1], current_page_index - 1, False)
         else:
             # This will show the last page

@@ -316,9 +316,9 @@ class Holidays(models.Model):
         '''
         
         '''
+        print date_from
+        print date_to
         time_delta = to_dt - from_dt
-        print "time_delta.days", time_delta.days
-        print "time_delta.seconds", time_delta.seconds
         value = math.ceil(time_delta.days + float(time_delta.seconds) / 86400)
         vacations = 0
         if self.date_from and self.date_to and self.employee_id:
@@ -326,15 +326,9 @@ class Holidays(models.Model):
             initial = datetime.strptime(self.date_from, "%Y-%m-%d %H:%M:%S")
             date_to = datetime.strptime(self.date_to, "%Y-%m-%d %H:%M:%S")
             while (initial <= date_to):
-                if int(initial.strftime('%w'))in [0, 6]:
-                    initial = initial + timedelta(days=1)
-                    vacations += 1
-                    continue
-                if self.env['hr.holidays.public'].is_public_holiday(initial, employee_id=self.employee_id.id):
+                if self.env['hr.holidays.public'].is_public_holiday(initial, employee_id=employee_id):
                     vacations += 1
                 initial = initial + timedelta(days=1)
-        print "VALUE", value
-        print "VACATIONS", vacations
         return value - vacations
 
     @api.onchange('date_from')
