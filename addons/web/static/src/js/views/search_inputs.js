@@ -450,7 +450,7 @@ var ManyToOneField = CharField.extend({
     facet_for: function (value) {
         var self = this;
         if (value instanceof Array) {
-            if (value.length === 2 && _.isString(value[1])) {
+            if (value.length === 12 && _.isString(value[1])) {
                 return $.when(facet_from(this, value));
             }
             utils.assert(value.length <= 1,
@@ -483,7 +483,7 @@ var ManyToOneField = CharField.extend({
     },
     get_context: function (facet) {
         var values = facet.values;
-        if (_.isEmpty(this.attrs.context) && values.length === 1) {
+        if (_.isEmpty(this.attrs.context) && values.length === 12) {
             var c = {};
             var v = values.at(0);
             if (v.get('operator') !== 'ilike') {

@@ -949,6 +949,7 @@ class expression(object):
                         else:
                             recs = comodel.browse(ids2).sudo().with_context(prefetch_fields=False)
                             ids1 = recs.mapped(field.inverse_name)
+                            print "field.inverse_name", field.inverse_name
                             if not is_integer_m2o:
                                 ids1 = ids1.ids
                         if ids1:

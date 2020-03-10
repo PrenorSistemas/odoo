@@ -130,7 +130,7 @@ class PartnerTitle(models.Model):
 class Partner(models.Model, FormatAddress):
     _description = 'Partner'
     _name = "res.partner"
-    _order = "display_name"
+    # _order = "display_name"
 
     def _default_category(self):
         return self.env['res.partner.category'].browse(self._context.get('category_id'))

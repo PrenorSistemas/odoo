@@ -78,6 +78,13 @@
                     <div class='jumbotron mt32'>
                         <h1 t-field='survey.title' />
                         <div t-field='survey.description' class="oe_no_empty"/>
+
+                        <input type="checkbox" name="conditions_protection" id="conditions_protection" required="required" />
+                            Acepto <a href="/page/recoweb.legal_info" target="_blank">las condiciones de uso y protección de datos.</a>
+
+                        <input type="checkbox" name="conditions_protection" id="conditions_protection" required="required" />
+                            Acepto <a href="/page/recoweb.consentimiento_informado" target="_blank">el consentimiento informado.</a>
+
                         <a class="btn btn-primary btn-lg" t-att-href="'/survey/fill/%s/%s' % (slug(survey), token)">
                             Start Survey
                         </a>
@@ -125,7 +132,7 @@
                 <div class="js_question-wrapper" t-att-id="prefix">
                     <h2>
                         <span t-field='question.question' />
-                        <span t-if="question.constr_mandatory" class="text-danger">*</span>
+                        <span t-if="question.constr_mandatory" class="text-danger"/>
                     </h2>
                     <div t-field='question.description' class="text-muted oe_no_empty"/>
                     <t t-if="question.type == 'free_text'"><t t-call="survey.free_text"/></t>
@@ -139,7 +146,7 @@
                 </div>
             </t>
             <div class="text-center mt16 mb16">
-                <button t-if="survey.users_can_go_back and page_nr > 0" type="submit" class="btn btn-default" name="button_submit" value="previous">Previous page</button>
+                <button t-if="page_nr > 0" type="submit" class="btn btn-default" name="button_submit" value="previous">Previous page</button>
                 <button t-if="not last" type="submit" class="btn btn-primary" name="button_submit" value="next">Next page</button>
                 <button t-if="last" type="submit" class="btn btn-primary" name="button_submit" value="finish">Submit survey</button>
             </div>
