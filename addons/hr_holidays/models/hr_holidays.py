@@ -327,7 +327,7 @@ class Holidays(models.Model):
             date_to = datetime.strptime(self.date_to, "%Y-%m-%d %H:%M:%S")
             while (initial <= date_to):
                 print "initial.weekday", initial.weekday()
-                if initial.weekday() in [0, 6]:
+                if initial.weekday() in [5, 6]:
                     pass
                 elif self.env['hr.holidays.public'].is_public_holiday(initial, employee_id=employee_id):
                     vacations += 1
