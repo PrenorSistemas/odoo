@@ -15,10 +15,12 @@ from odoo.tools.translate import _
 
 _logger = logging.getLogger(__name__)
 
+
 HOURS_PER_DAY = 8
 
 
 class HolidaysType(models.Model):
+
     _name = "hr.holidays.status"
     _description = "Leave Type"
 

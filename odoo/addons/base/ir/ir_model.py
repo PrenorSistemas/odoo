@@ -906,6 +906,7 @@ class IrModelAccess(models.Model):
         if self._uid == 1:
             # User root have all accesses
             return True
+
         assert mode in ('read', 'write', 'create', 'unlink'), 'Invalid access mode'
 
         if isinstance(model, models.BaseModel):

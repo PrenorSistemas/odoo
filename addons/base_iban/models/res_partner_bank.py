@@ -52,7 +52,6 @@ class ResPartnerBank(models.Model):
         except ValidationError:
             super(ResPartnerBank, self)._compute_acc_type()
 
-
     def get_bban(self):
         if self.acc_type != 'iban':
             raise UserError(_("Cannot compute the BBAN because the account number is not an IBAN."))

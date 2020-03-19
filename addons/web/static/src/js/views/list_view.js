@@ -1005,7 +1005,7 @@ ListView.List = Class.extend({
                       field = $target.closest('td').data('field'),
                        $row = $target.closest('tr'),
                   record_id = self.row_id($row);
-
+                
                 if ($target.attr('disabled')) {
                     return;
                 }

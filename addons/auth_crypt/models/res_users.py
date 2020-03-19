@@ -27,7 +27,6 @@ class ResUsers(models.Model):
     _inherit = "res.users"
 
     def init(self):
-        return
         _logger.info("Hashing passwords, may be slow for databases with many users...")
         self.env.cr.execute("SELECT id, password FROM res_users"
                    " WHERE password IS NOT NULL"
