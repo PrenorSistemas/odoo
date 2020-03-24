@@ -3468,11 +3468,8 @@ class BaseModel(object):
 
         # recompute new-style fields
         if self.env.recompute and self._context.get('recompute', True):
-            try:
-                self.recompute()
-            except:
-                print self
-                self.recompute()
+            self.recompute()
+
         # auditing: deletions are infrequent and leave no trace in the database
         _unlink.info('User #%s deleted %s records with IDs: %r', self._uid, self._name, self.ids)
 
@@ -3621,11 +3618,7 @@ class BaseModel(object):
 
                 # recompute new-style fields
                 if self.env.recompute and self._context.get('recompute', True):
-                    try:
-                        self.recompute()
-                    except:
-                        print self
-                        self.recompute()
+                    self.recompute()
 
         return True
 
@@ -3827,11 +3820,7 @@ class BaseModel(object):
 
         # recompute new-style fields
         if self.env.recompute and self._context.get('recompute', True):
-            try:
-                self.recompute()
-            except:
-                print self
-                self.recompute()
+            self.recompute()
 
         self.step_workflow()
         return True
@@ -3898,11 +3887,7 @@ class BaseModel(object):
             record._validate_fields(set(new_vals) - set(old_vals))
             # recompute new-style fields
             if self.env.recompute and self._context.get('recompute', True):
-                try:
-                    self.recompute()
-                except:
-                    print self
-                    self.recompute()
+                self.recompute()
 
         return record
 
@@ -4047,11 +4032,7 @@ class BaseModel(object):
 
             if self.env.recompute and self._context.get('recompute', True):
                 # recompute new-style fields
-                try:
-                    self.recompute()
-                except:
-                    print self
-                    self.recompute()
+                self.recompute()
 
         self.check_access_rule('create')
 

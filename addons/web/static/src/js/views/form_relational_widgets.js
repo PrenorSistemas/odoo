@@ -1478,12 +1478,7 @@ var FieldMany2ManyTags = AbstractManyField.extend(common.CompletionFieldMixin, c
         var values = this.get("value");
         var handle_names = function(_data) {
             _.each(_data, function(el) {
-                try{
-                el.display_name = el.name.trim() ? _.str.escapeHTML(el.name) : data.noDisplayContent;
-                }catch(err){
-
-                    el.display_name = _.str.escapeHTML(el.name);
-                }
+                el.display_name = el.display_name.trim() ? _.str.escapeHTML(el.display_name) : data.noDisplayContent;
             });
             self.render_tag(_data);
         };
