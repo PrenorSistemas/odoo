@@ -3473,7 +3473,6 @@ class BaseModel(object):
             except:
                 print self
                 self.recompute()
-
         # auditing: deletions are infrequent and leave no trace in the database
         _unlink.info('User #%s deleted %s records with IDs: %r', self._uid, self._name, self.ids)
 

@@ -83,10 +83,7 @@
             </t>
         </template>
 
-        <template id="website_crm_tests" name="Website CRM Tests" inherit_id="web.assets_common">
-            <xpath expr="." position="inside">
-            </xpath>
-        </template>
+
 
         <template id="assets_backend" inherit_id="web.assets_backend">
           <xpath expr="." position="inside">
