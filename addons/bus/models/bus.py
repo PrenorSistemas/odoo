@@ -98,7 +98,7 @@ class ImBus(models.Model):
                 result += [{
                     'id': -1,
                     'channel': (self._cr.dbname, 'bus.presence'),
-                    'message': {'id': r.id, 'im_status': r.im_status}} for r in partners]
+                    'message': {'id': r.id, 'im_status': 'offline'}} for r in partners]
         return result
 
 
