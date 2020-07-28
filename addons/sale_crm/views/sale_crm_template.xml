@@ -3,7 +3,6 @@
     <data>
         <template id="assets_backend" name="project assets" inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
-                <script type="text/javascript" src="/sale_crm/static/src/js/tour.js"></script>
             </xpath>
         </template>
     </data>
