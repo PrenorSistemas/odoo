@@ -428,8 +428,8 @@ class HrExpenseSheet(models.Model):
             expense_lines = rec.expense_line_ids
             if not expense_lines:
                 continue
-            if any(expense.employee_id != rec.employee_id for expense in expense_lines):
-                raise UserError(_("Expenses must belong to the same Employee."))
+            #if any(expense.employee_id != rec.employee_id for expense in expense_lines):
+            #    raise UserError(_("Expenses must belong to the same Employee."))
 
     @api.model
     def create(self, vals):
