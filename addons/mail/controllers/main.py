@@ -269,11 +269,14 @@ class MailController(http.Controller):
     @http.route('/mail/client_action', type='json', auth='user')
     def mail_client_action(self):
         values = {
-            'needaction_inbox_counter': request.env['res.partner'].get_needaction_count(),
-            'starred_counter': request.env['res.partner'].get_starred_count(),
-            'channel_slots': request.env['mail.channel'].channel_fetch_slot(),
-            'commands': request.env['mail.channel'].get_mention_commands(),
-            'mention_partner_suggestions': request.env['res.partner'].get_static_mention_suggestions(),
+            'needaction_inbox_counter': 0, #request.env['res.partner'].get_needaction_count(),
+            'starred_counter': 0, #request.env['res.partner'].get_starred_count(),
+            'channel_slots': {'channel_channel': [],
+                              'channel_direct_message': [],
+                              'channel_private_group': [],
+                              }, # request.env['mail.channel'].channel_fetch_slot(),
+            'commands': [], #request.env['mail.channel'].get_mention_commands(),
+            'mention_partner_suggestions': [], #request.env['res.partner'].get_static_mention_suggestions(),
             'shortcodes': request.env['mail.shortcode'].sudo().search_read([], ['shortcode_type', 'source', 'substitution', 'description']),
             'menu_id': request.env['ir.model.data'].xmlid_to_res_id('mail.mail_channel_menu_root_chat'),
         }
