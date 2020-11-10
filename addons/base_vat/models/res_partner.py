@@ -116,6 +116,26 @@ class ResPartner(models.Model):
                 vat = country_code + vat
         return vat
 
+    @api.constrains("vat")
+    def check_vat(self):
+        if self.env.context.get('company_id'):
+            company = self.env['res.company'].browse(self.env.context['company_id'])
+        else:
+            company = self.env.user.company_id
+        if company.vat_check_vies:
+            # force full VIES online check
+            check_func = self.vies_vat_check
+        else:
+            # quick and partial off-line checksum validation
+            check_func = self.simple_vat_check
+        for partner in self:
+            if not partner.vat:
+                continue
+            vat_country, vat_number = self._split_vat(partner.vat)
+            if not check_func(vat_country, vat_number):
+                _logger.info("Importing VAT Number [%s] is not valid !" % vat_number)
+                msg = partner._construct_constraint_msg()
+                raise ValidationError(msg)
 
     def _construct_constraint_msg(self):
         self.ensure_one()
