@@ -342,6 +342,7 @@ class MailComposer(models.TransientModel):
         values = self.onchange_template_id(self.template_id.id, self.composition_mode, self.model, self.res_id)['value']
         for fname, value in values.iteritems():
             setattr(self, fname, value)
+        return True
 
     @api.multi
     def onchange_template_id(self, template_id, composition_mode, model, res_id):
