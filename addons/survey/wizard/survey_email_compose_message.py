@@ -131,6 +131,7 @@ class SurveyMailComposeMessage(models.TransientModel):
                     'partner_id': partner_id,
                     'email': email})
                 return survey_user_input.token
+
         for wizard in self:
             # check if __URL__ is in the text
             if wizard.body.find("__URL__") < 0:
@@ -150,6 +151,7 @@ class SurveyMailComposeMessage(models.TransientModel):
                     email = email.strip()
                     if email_validator.match(email):
                         emails_list.append(email)
+
             # remove public anonymous access
             partner_list = []
             for partner in wizard.partner_ids:

@@ -14,7 +14,7 @@ from odoo.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT
 _logger = logging.getLogger(__name__)
 
 # longpolling timeout connection
-TIMEOUT = 50
+TIMEOUT = 20
 
 #----------------------------------------------------------
 # Bus
@@ -44,6 +44,7 @@ class ImBus(models.Model):
 
     @api.model
     def sendmany(self, notifications):
+        return True
         channels = set()
         for channel, message in notifications:
             channels.add(channel)
@@ -71,6 +72,7 @@ class ImBus(models.Model):
 
     @api.model
     def poll(self, channels, last=0, options=None, force_status=False):
+        return []
         if options is None:
             options = {}
         # first poll return the notification in the 'buffer'

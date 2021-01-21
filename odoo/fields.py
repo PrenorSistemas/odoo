@@ -734,11 +734,7 @@ class Field(object):
                 _logger.warning("Field %s depends on itself; please fix its decorator @api.depends().", self)
             model, path = model0, path0
             for fname in dotnames.split('.'):
-                try:
-                    field = model._fields[fname]
-                except:
-                    print "{0} {1} {2}".format(model, self, fname)
-                    raise
+                field = model._fields[fname]
                 result.append((model, field, path))
                 model = model0.env.get(field.comodel_name)
                 path = None if path is None else path + [fname]
@@ -2197,12 +2193,7 @@ class One2many(_RelationalMulti):
         if self.inverse_name:
             # link self to its inverse field and vice-versa
             comodel = model.env[self.comodel_name]
-
-            try:
-                invf = comodel._fields[self.inverse_name]
-            except:
-                print "self {0} {1} {2}".format(self, model, self.inverse_name)
-                raise
+            invf = comodel._fields[self.inverse_name]
             # In some rare cases, a ``One2many`` field can link to ``Int`` field
             # (res_model/res_id pattern). Only inverse the field if this is
             # a ``Many2one`` field.

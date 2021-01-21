@@ -249,7 +249,6 @@ class MailThread(models.AbstractModel):
                 track_thread = thread
             tracked_fields = track_thread._get_tracked_fields(values.keys())
             if tracked_fields:
-                print "tracked_fields", tracked_fields
                 initial_values = {thread.id: dict.fromkeys(tracked_fields, False)}
                 track_thread.message_track(tracked_fields, initial_values)
 

@@ -59,7 +59,7 @@ from odoo.tools import stripped_sys_argv, dumpstacks, log_ormcache_stats
 
 _logger = logging.getLogger(__name__)
 
-SLEEP_INTERVAL = 60     # 1 min
+SLEEP_INTERVAL = 6     # 1 min
 
 def memory_info(process):
     """ psutil < 2.0 does not have memory_info, >= 3.0 does not have
@@ -382,7 +382,7 @@ class ThreadedServer(CommonServer):
         # by the signal handler.) The try/except is for the win32 case.
         try:
             while self.quit_signals_received == 0:
-                time.sleep(60)
+                time.sleep(6)
         except KeyboardInterrupt:
             pass
 

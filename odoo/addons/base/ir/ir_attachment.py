@@ -50,14 +50,6 @@ class IrAttachment(models.Model):
         return config.filestore(self._cr.dbname)
 
     @api.model
-    def _filestore2(self):
-        import socket
-        if socket.gethostname() in ['preweb', 'preweb2']:
-            return os.path.join('/repo2/share/', 'filestore', self._cr.dbname)
-        else:
-            return config.filestore(self._cr.dbname)
-
-    @api.model
     def force_storage(self):
         """Force all attachments to be stored in the currently configured storage"""
         if not self.env.user._is_admin():
@@ -81,13 +73,6 @@ class IrAttachment(models.Model):
         return os.path.join(self._filestore(), path)
 
     @api.model
-    def _full_path2(self, path):
-        # sanitize path
-        path = re.sub('[.]', '', path)
-        path = path.strip('/\\')
-        return os.path.join(self._filestore2(), path)
-
-    @api.model
     def _get_path(self, bin_data, sha):
         # retro compatibility
         fname = sha[:3] + '/' + sha
@@ -106,9 +91,7 @@ class IrAttachment(models.Model):
 
     @api.model
     def _file_read(self, fname, bin_size=False):
-        full_path = self._full_path2(fname)
-        if not os.path.exists(full_path):
-            full_path = self._full_path(fname)
+        full_path = self._full_path(fname)
         r = ''
         try:
             if bin_size:
@@ -118,20 +101,6 @@ class IrAttachment(models.Model):
         except (IOError, OSError):
             _logger.info("_read_file reading %s", full_path, exc_info=True)
         return r
-
-    @api.model
-    def _file_read2(self, fname, bin_size=False):
-        full_path = self._full_path2(fname)
-        r = ''
-        try:
-            if bin_size:
-                r = human_size(os.path.getsize(full_path))
-            else:
-                r = open(full_path,'rb').read().encode('base64')
-        except (IOError, OSError):
-            _logger.info("_read_file reading %s", full_path, exc_info=True)
-        return r
-
 
     @api.model
     def _file_write(self, value, checksum):
@@ -218,7 +187,6 @@ class IrAttachment(models.Model):
         for attach in self:
             if attach.store_fname:
                 attach.datas = self._file_read(attach.store_fname, bin_size)
-
             else:
                 attach.datas = attach.db_datas
 

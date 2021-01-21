@@ -11,7 +11,7 @@ class BusController(Controller):
     openerp.jsonRpc('/longpolling/send','call',{"channel":"c1","message":"m1"});
     openerp.jsonRpc('/longpolling/send','call',{"channel":"c2","message":"m2"});
     """
-
+    '''
     @route('/longpolling/send', type="json", auth="public")
     def send(self, channel, message):
         if not isinstance(channel, basestring):
@@ -38,3 +38,4 @@ class BusController(Controller):
         if request.registry.in_test_mode():
             raise exceptions.UserError("bus.Bus not available in test mode")
         return self._poll(request.db, channels, last, options)
+    '''
