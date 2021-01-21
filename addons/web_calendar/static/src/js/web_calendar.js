@@ -923,7 +923,7 @@ var CalendarView = View.extend({
                 res_id: res_id,
                 context: this.dataset.get_context(),
                 title: title,
-                view_id: +this.open_popup_action,
+                view_id: this.open_popup_action,
                 readonly: true,
                 buttons: [
                     {text: _t("Edit"), classes: 'btn-primary', close: true, click: function() {
