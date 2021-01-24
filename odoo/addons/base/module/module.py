@@ -600,7 +600,13 @@ class Module(models.Model):
             'res_id': new.id,
             'noupdate': True,
         }
-        self.env['ir.model.data'].create(module_metadata)
+        model_data = self.env['ir.model.data'].search([('model', '=', 'ir.module.module'),
+                                             ('module', '=', 'base'),
+                                             ('name', '=', 'module_%s' % vals['name'])])
+        if model_data:
+            model_data.write(module_metadata)
+        else:
+            self.env['ir.model.data'].create(module_metadata)
         return new
 
     # update the list of available packages
