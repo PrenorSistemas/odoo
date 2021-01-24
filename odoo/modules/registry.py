@@ -4,15 +4,6 @@
 """ Models registries.
 
 """
-
-##############################################################################
-#
-#    odoo_cluster
-#    author:15251908@qq.com (openliu)
-#    license:'LGPL-3
-#
-##############################################################################
-
 from collections import Mapping, defaultdict, deque
 from contextlib import closing
 from operator import attrgetter
@@ -26,8 +17,6 @@ from .. import SUPERUSER_ID
 from odoo.tools import (assertion_report, lazy_classproperty, config,
                         lazy_property, topological_sort, OrderedSet)
 from odoo.tools.lru import LRU
-from odoo.tools.RedisLRU import RedisLRU
-import redis
 
 _logger = logging.getLogger(__name__)
 
@@ -90,7 +79,11 @@ class Registry(Mapping):
                 try:
                     registry.setup_signaling()
                     # This should be a method on Registry
-                    odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+                    try:
+                        odoo.modules.load_modules(registry._db, force_demo, status, update_module)
+                    except Exception:
+                        odoo.modules.reset_modules_state(db_name)
+                        raise
                 except Exception:
                     _logger.exception('Failed to load registry')
                     del cls.registries[db_name]
@@ -142,10 +135,7 @@ class Registry(Mapping):
         self.registry_sequence = None
         self.cache_sequence = None
 
-        #self.cache = LRU(8192)
-        r=redis.StrictRedis.from_url(odoo.tools.config['ormcache_redis_url'])
-        self.cache= RedisLRU(r,db_name)
-
+        self.cache = LRU(8192)
         # Flag indicating if at least one model cache has been cleared.
         # Useful only in a multi-process context.
         self.cache_cleared = False
@@ -161,7 +151,6 @@ class Registry(Mapping):
         """ Delete the registry linked to a given database. """
         with cls._lock:
             if db_name in cls.registries:
-                cls.registries[db_name].clear_caches()
                 del cls.registries[db_name]
 
     @classmethod
