@@ -5447,7 +5447,6 @@ class BaseModel(object):
         def process(res):
             if not res:
                 return
-            print "onchange", onchange
             if res.get('value'):
                 res['value'].pop('id', None)
                 self.update({key: val for key, val in res['value'].iteritems() if key in self._fields})
