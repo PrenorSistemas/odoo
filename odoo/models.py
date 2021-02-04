@@ -4756,8 +4756,6 @@ class BaseModel(object):
 
         """
 
-        print "MODEL", domain
-        print "FIELDS", fields
 
         records = self.search(domain or [], offset=offset, limit=limit, order=order)
         if not records:
