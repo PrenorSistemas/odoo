@@ -1393,6 +1393,7 @@ class BaseModel(object):
 
         # context for post-processing might be overriden
         if view_id:
+            view_id = int(view_id)
             # read the view with inherited views applied
             root_view = View.browse(view_id).read_combined(['id', 'name', 'field_parent', 'type', 'model', 'arch'])
             result['arch'] = root_view['arch']
@@ -3191,6 +3192,7 @@ class BaseModel(object):
         if missing:
             extras = fetched - self
             if extras:
+                print test
                 raise AccessError(
                     _("Database fetch misses ids ({}) and has extra ids ({}), may be caused by a type incoherence in a previous request").format(
                         ', '.join(map(repr, missing._ids)),
@@ -4753,6 +4755,10 @@ class BaseModel(object):
         :rtype: List of dictionaries.
 
         """
+
+        print "MODEL", domain
+        print "FIELDS", fields
+
         records = self.search(domain or [], offset=offset, limit=limit, order=order)
         if not records:
             return []
