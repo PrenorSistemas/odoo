@@ -1393,7 +1393,7 @@ class BaseModel(object):
 
         # context for post-processing might be overriden
         if view_id:
-            view_id = int(view_id)
+            # view_id = int(view_id)
             # read the view with inherited views applied
             root_view = View.browse(view_id).read_combined(['id', 'name', 'field_parent', 'type', 'model', 'arch'])
             result['arch'] = root_view['arch']
