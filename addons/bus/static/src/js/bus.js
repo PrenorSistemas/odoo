@@ -70,11 +70,7 @@ bus.Bus = Widget.extend({
         var options = _.extend({}, this.options, {
             bus_inactivity: now - this.get_last_presence(),
         });
-        if (this.last_partners_presence_check + PARTNERS_PRESENCE_CHECK_PERIOD > now) {
-            options = _.omit(options, 'bus_presence_partner_ids');
-        } else {
-            this.last_partners_presence_check = now;
-        }
+        this.last_partners_presence_check = now;
         var data = {channels: self.channels, last: self.last, options: options};
         // The backend has a maximum cycle time of 50 seconds so give +10 seconds
         session.rpc('/longpolling/poll', data, {shadow : true, timeout: 60000}).then(function(result) {

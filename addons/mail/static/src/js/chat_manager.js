@@ -314,7 +314,7 @@ function make_channel (data, options) {
         channel.direct_partner_id = data.direct_partner[0].id;
         channel.status = data.direct_partner[0].im_status;
         pinned_dm_partners.push(channel.direct_partner_id);
-        bus.update_option('bus_presence_partner_ids', pinned_dm_partners);
+        //bus.update_option('bus_presence_partner_ids', pinned_dm_partners);
     } else if ('anonymous_name' in data) {
         channel.name = data.anonymous_name;
     }
@@ -334,7 +334,7 @@ function remove_channel (channel) {
         var index = pinned_dm_partners.indexOf(channel.direct_partner_id);
         if (index > -1) {
             pinned_dm_partners.splice(index, 1);
-            bus.update_option('bus_presence_partner_ids', pinned_dm_partners);
+            //bus.update_option('bus_presence_partner_ids', pinned_dm_partners);
         }
     }
     channels = _.without(channels, channel);
