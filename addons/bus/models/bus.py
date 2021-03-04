@@ -72,35 +72,7 @@ class ImBus(models.Model):
     @api.model
     def poll(self, channels, last=0, options=None, force_status=False):
         return []
-        if options is None:
-            options = {}
-        # first poll return the notification in the 'buffer'
-        if last == 0:
-            timeout_ago = datetime.datetime.utcnow()-datetime.timedelta(seconds=TIMEOUT)
-            domain = [('create_date', '>', timeout_ago.strftime(DEFAULT_SERVER_DATETIME_FORMAT))]
-        else:  # else returns the unread notifications
-            domain = [('id', '>', last)]
-        channels = [json_dump(c) for c in channels]
-        domain.append(('channel', 'in', channels))
-        notifications = self.sudo().search_read(domain)
-        # list of notification to return
-        result = []
-        for notif in notifications:
-            result.append({
-                'id': notif['id'],
-                'channel': json.loads(notif['channel']),
-                'message': json.loads(notif['message']),
-            })
 
-        if result or force_status:
-            partner_ids = options.get('bus_presence_partner_ids')
-            if partner_ids:
-                partners = self.env['res.partner'].browse(partner_ids)
-                result += [{
-                    'id': -1,
-                    'channel': (self._cr.dbname, 'bus.presence'),
-                    'message': {'id': r.id, 'im_status': 'offline'}} for r in partners]
-        return result
 
 
 #----------------------------------------------------------
