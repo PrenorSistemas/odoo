@@ -3458,7 +3458,7 @@ class BaseModel(object):
                 # (the search is performed with sql as the search method of
                 # ir_attachment is overridden to hide attachments of deleted
                 # records)
-                query = 'SELECT id FROM ir_attachment WHERE active = True res_model=%s AND res_id IN %s'
+                query = 'SELECT id FROM ir_attachment WHERE active = True AND res_model=%s AND res_id IN %s'
                 cr.execute(query, (self._name, sub_ids))
                 attachments = Attachment.browse([row[0] for row in cr.fetchall()])
                 if attachments:
