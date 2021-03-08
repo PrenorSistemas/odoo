@@ -149,7 +149,7 @@ class IrAttachment(models.Model):
         cr.commit()
 
         # prevent all concurrent updates on ir_attachment while collecting!
-        # cr.execute("LOCK ir_attachment IN SHARE MODE")
+        cr.execute("LOCK ir_attachment IN SHARE MODE")
 
         # retrieve the file names from the checklist
         checklist = {}

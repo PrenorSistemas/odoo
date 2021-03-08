@@ -7,7 +7,7 @@ import re
 import uuid
 
 from odoo import _, api, fields, models, modules, tools
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, AccessError
 from odoo.osv import expression
 from odoo.tools import ormcache
 from odoo.tools.safe_eval import safe_eval

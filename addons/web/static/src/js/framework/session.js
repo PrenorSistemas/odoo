@@ -236,7 +236,6 @@ var Session = core.Class.extend(mixins.EventDispatcherMixin, {
         return d;
     },
     load_qweb: function(mods) {
-
         this.qweb_mutex.exec(function () {
             return $.get('/web/webclient/qweb?mods=' + mods).then(function (doc) {
                 if (!doc) { return; }
