@@ -416,10 +416,28 @@ class MergePartnerAutomatic(models.TransientModel):
         """ Helper : returns a `res.partner` recordset ordered by create_date/active fields
             :param partner_ids : list of partner ids to sort
         """
-        return self.env['res.partner'].browse(partner_ids).sorted(
-            key=lambda p: (p.active, p.create_date),
-            reverse=True,
-        )
+        partners = []
+        for partner_id in partner_ids:
+            contracts = self.env['spa.contract'].search(
+                [('partner_id', '=', partner_id),
+                 ('to_renew', '=', True),
+                 ('renew_sent', '=', False),
+                 ('state', '!=', 'cancelled'),
+                 ('state', '!=', 'baja_et'),
+                 ('state', '!=', 'baja_vs'),
+                 ('state', '!=', 'close')])
+            if contracts:
+                partners.append(partner_id)
+        for partner_id in partner_ids:
+            if partner_id not in partners:
+                partners.append(partner_id)
+        partners.reverse()
+        return partners
+
+        #return self.env['res.partner'].browse(partner_ids).sorted(
+        #    key=lambda p: (p.active, p.create_date),
+        #    reverse=True,
+        #)
 
     @api.multi
     def _compute_models(self):
