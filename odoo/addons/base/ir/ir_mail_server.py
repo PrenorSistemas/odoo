@@ -21,7 +21,7 @@ _logger = logging.getLogger(__name__)
 _test_logger = logging.getLogger('odoo.tests')
 
 SMTP_TIMEOUT = 60
-
+smtp = None
 
 class MailDeliveryException(except_orm):
     """Specific exception subclass for mail delivery errors"""
@@ -174,9 +174,10 @@ class IrMailServer(models.Model):
     @api.multi
     def test_smtp_connection(self):
         for server in self:
-            smtp = False
+            global smtp
             try:
-                smtp = self.connect(server.smtp_host, server.smtp_port, user=server.smtp_user,
+                if not smtp:
+                    smtp = self.connect(server.smtp_host, server.smtp_port, user=server.smtp_user,
                                     password=server.smtp_pass, encryption=server.smtp_encryption,
                                     smtp_debug=server.smtp_debug)
             except Exception as e:
@@ -453,9 +454,10 @@ class IrMailServer(models.Model):
                 mdir.add(message.as_string(True))
                 return message_id
 
-            smtp = None
+            global smtp
             try:
-                smtp = self.connect(smtp_server, smtp_port, smtp_user, smtp_password, smtp_encryption or False, smtp_debug)
+                if not smtp:
+                    smtp = self.connect(smtp_server, smtp_port, smtp_user, smtp_password, smtp_encryption or False, smtp_debug)
                 smtp.sendmail(smtp_from, smtp_to_list, message.as_string())
             finally:
                 if smtp is not None:
