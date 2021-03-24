@@ -22,7 +22,7 @@ _test_logger = logging.getLogger('odoo.tests')
 
 SMTP_TIMEOUT = 60
 smtp = None
-
+connection = None
 class MailDeliveryException(except_orm):
     """Specific exception subclass for mail delivery errors"""
     def __init__(self, name, value):
@@ -176,8 +176,7 @@ class IrMailServer(models.Model):
         for server in self:
             global smtp
             try:
-                if not smtp:
-                    smtp = self.connect(server.smtp_host, server.smtp_port, user=server.smtp_user,
+                smtp = self.connect(server.smtp_host, server.smtp_port, user=server.smtp_user,
                                     password=server.smtp_pass, encryption=server.smtp_encryption,
                                     smtp_debug=server.smtp_debug)
             except Exception as e:
@@ -204,6 +203,9 @@ class IrMailServer(models.Model):
            :param bool smtp_debug: toggle debugging of SMTP sessions (all i/o
                               will be output in logs)
         """
+        global connection
+        if connection:
+            return connection
         if encryption == 'ssl':
             if not 'SMTP_SSL' in smtplib.__all__:
                 raise UserError(_("Your OpenERP Server does not support SMTP-over-SSL. You could use STARTTLS instead."
@@ -456,12 +458,13 @@ class IrMailServer(models.Model):
 
             global smtp
             try:
-                if not smtp:
-                    smtp = self.connect(smtp_server, smtp_port, smtp_user, smtp_password, smtp_encryption or False, smtp_debug)
+                smtp = self.connect(smtp_server, smtp_port, smtp_user, smtp_password, smtp_encryption or False, smtp_debug)
                 smtp.sendmail(smtp_from, smtp_to_list, message.as_string())
-            finally:
-                if smtp is not None:
-                    smtp.quit()
+            except:
+                pass
+            #finally:
+                #if smtp is not None:
+                #    smtp.quit()
         except Exception as e:
             params = (ustr(smtp_server), e.__class__.__name__, ustr(e))
             msg = _("Mail delivery failed via SMTP server '%s'.\n%s: %s") % params
