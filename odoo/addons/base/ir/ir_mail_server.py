@@ -460,11 +460,9 @@ class IrMailServer(models.Model):
             try:
                 smtp = self.connect(smtp_server, smtp_port, smtp_user, smtp_password, smtp_encryption or False, smtp_debug)
                 smtp.sendmail(smtp_from, smtp_to_list, message.as_string())
-            except:
-                pass
-            #finally:
-                #if smtp is not None:
-                #    smtp.quit()
+            finally:
+                if smtp is not None:
+                    smtp.quit()
         except Exception as e:
             params = (ustr(smtp_server), e.__class__.__name__, ustr(e))
             msg = _("Mail delivery failed via SMTP server '%s'.\n%s: %s") % params
