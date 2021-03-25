@@ -2982,6 +2982,7 @@ class BaseModel(object):
             if invalid_fields:
                 _logger.info('Access Denied by ACLs for operation: %s, uid: %s, model: %s, fields: %s',
                     operation, self._uid, self._name, ', '.join(invalid_fields))
+                print test
                 raise AccessError(
                     _(
                         'The requested operation cannot be completed due to security restrictions. '
@@ -3202,6 +3203,7 @@ class BaseModel(object):
             forbidden = missing.exists()
             if forbidden:
                 # store an access error exception in existing records
+                print test
                 exc = AccessError(
                     _('The requested operation cannot be completed due to security restrictions. Please contact your system administrator.\n\n(Document type: %s, Operation: %s)') % (self._description, 'read')
                     + ' - ({} {}, {} {})'.format(_('Records:'), self.ids[:6], _('User:'), self._uid)
@@ -3288,6 +3290,7 @@ class BaseModel(object):
                 if self._uid == SUPERUSER_ID:
                     return
                 _logger.info('Access Denied by record rules for operation: %s on record ids: %r, uid: %s, model: %s', operation, forbidden_ids, self._uid, self._name)
+                print test
                 raise AccessError(
                     _('The requested operation cannot be completed due to security restrictions. Please contact your system administrator.\n\n(Document type: %s, Operation: %s)') % (self._description, operation)
                     + ' - ({} {}, {}, {})'.format(_('Records:'), forbidden_ids[:6], _('User:'), self._uid)

@@ -582,6 +582,7 @@ class Message(models.Model):
                                 ON message.subtype_id = subtype.id
                                 WHERE message.message_type = %%s AND (message.subtype_id IS NULL OR subtype.internal IS TRUE) AND message.id = ANY (%%s)''' % (self._table), ('comment', self.ids,))
             if self._cr.fetchall():
+                print test
                 raise AccessError(
                     _('The requested operation cannot be completed due to security restrictions. Please contact your system administrator.\n\n(Document type: %s, Operation: %s)') % (self._description, operation)
                     + ' - ({} {}, {} {})'.format(_('Records:'), self.ids[:6], _('User:'), self._uid)
@@ -683,6 +684,7 @@ class Message(models.Model):
         other_ids = other_ids.difference(set(document_related_ids))
         if not other_ids:
             return
+        print test
         raise AccessError(
             _('The requested operation cannot be completed due to security restrictions. Please contact your system administrator.\n\n(Document type: %s, Operation: %s)') % (self._description, operation)
             + ' - ({} {}, {} {})'.format(_('Records:'), list(other_ids)[:6], _('User:'), self._uid)
