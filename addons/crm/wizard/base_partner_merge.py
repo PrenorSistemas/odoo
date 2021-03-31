@@ -430,7 +430,7 @@ class MergePartnerAutomatic(models.TransientModel):
                 partners.append(partner_id)
         for partner_id in partner_ids:
             if partner_id not in partners:
-                partners.append(partner_id)
+                partners.append(partner_id.id)
         partners.reverse()
         return partners
 
@@ -475,7 +475,7 @@ class MergePartnerAutomatic(models.TransientModel):
             values.update({
                 'current_line_id': current_line.id,
                 'partner_ids': [(6, 0, current_partner_ids)],
-                'dst_partner_id': self._get_ordered_partner(current_partner_ids)[-1].id,
+                'dst_partner_id': self._get_ordered_partner(current_partner_ids)[-1],
                 'state': 'selection',
             })
         else:
