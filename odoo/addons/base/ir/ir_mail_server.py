@@ -21,8 +21,8 @@ _logger = logging.getLogger(__name__)
 _test_logger = logging.getLogger('odoo.tests')
 
 SMTP_TIMEOUT = 60
-smtp = None
-connection = None
+
+
 class MailDeliveryException(except_orm):
     """Specific exception subclass for mail delivery errors"""
     def __init__(self, name, value):
@@ -174,7 +174,7 @@ class IrMailServer(models.Model):
     @api.multi
     def test_smtp_connection(self):
         for server in self:
-            global smtp
+            smtp = False
             try:
                 smtp = self.connect(server.smtp_host, server.smtp_port, user=server.smtp_user,
                                     password=server.smtp_pass, encryption=server.smtp_encryption,
@@ -203,9 +203,6 @@ class IrMailServer(models.Model):
            :param bool smtp_debug: toggle debugging of SMTP sessions (all i/o
                               will be output in logs)
         """
-        global connection
-        if connection:
-            return connection
         if encryption == 'ssl':
             if not 'SMTP_SSL' in smtplib.__all__:
                 raise UserError(_("Your OpenERP Server does not support SMTP-over-SSL. You could use STARTTLS instead."
@@ -456,7 +453,7 @@ class IrMailServer(models.Model):
                 mdir.add(message.as_string(True))
                 return message_id
 
-            global smtp
+            smtp = None
             try:
                 smtp = self.connect(smtp_server, smtp_port, smtp_user, smtp_password, smtp_encryption or False, smtp_debug)
                 smtp.sendmail(smtp_from, smtp_to_list, message.as_string())
