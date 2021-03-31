@@ -76,7 +76,7 @@ class MergePartnerAutomatic(models.TransientModel):
         if self.env.context.get('active_model') == 'res.partner' and active_ids:
             res['state'] = 'selection'
             res['partner_ids'] = active_ids
-            res['dst_partner_id'] = self._get_ordered_partner(active_ids)[-1].id
+            res['dst_partner_id'] = self._get_ordered_partner(active_ids)[-1]
         return res
 
     # Group by
