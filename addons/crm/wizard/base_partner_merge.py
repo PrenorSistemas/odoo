@@ -430,7 +430,7 @@ class MergePartnerAutomatic(models.TransientModel):
                 partners.append(partner_id)
         for partner_id in partner_ids:
             if partner_id not in partners:
-                partners.append(partner_id.id)
+                partners.append(partner_id)
         partners.reverse()
         return partners
 
