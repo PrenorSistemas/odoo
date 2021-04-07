@@ -298,7 +298,7 @@ class AssetsBundle(object):
                 attachments = self.env['ir.attachment'].sudo().search(assets_domain)
                 for attachment in attachments:
                     asset = assets[attachment.url]
-                    if asset.last_modified > fields.Datetime.from_string(attachment['__last_update']):
+                    if False and asset.last_modified > fields.Datetime.from_string(attachment['__last_update']):
                         outdated = True
                         break
                     if asset._content is None:
