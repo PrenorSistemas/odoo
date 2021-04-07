@@ -153,7 +153,7 @@ class AssetsBundle(object):
         """
         self.files.sort()
         self.remains.sort()
-        check = json.dumps(self.files) + ",".join(self.remains) + str(self.last_modified)
+        check = json.dumps(self.files) + ",".join(self.remains) #+ str(self.last_modified)
         return hashlib.sha1(check).hexdigest()
 
     def clean_attachments(self, type):
