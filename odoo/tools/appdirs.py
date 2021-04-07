@@ -335,6 +335,7 @@ class AppDirs(object):
         self.appname = appname
         self.appauthor = appauthor
         self.version = version
+        print "versionversion", version
         self.roaming = roaming
         self.multipath = multipath
     @property

@@ -107,6 +107,9 @@ class ThreadedWSGIServerReloadable(LoggingBaseWSGIServerMixIn, werkzeug.serving.
     socket open when a reload happens.
     """
     def __init__(self, host, port, app):
+        print ("HOST {0}".format(host))
+        print ("APP {0}".format(app))
+        print ("PORT {0}".format(port))
         super(ThreadedWSGIServerReloadable, self).__init__(host, port, app,
                                                            handler=RequestHandler)
 
