@@ -18,7 +18,7 @@ from odoo.tools import func, misc
 import logging
 _logger = logging.getLogger(__name__)
 
-MAX_CSS_RULES = 4095 * 1024
+MAX_CSS_RULES = 4095 * 4096
 
 
 def rjsmin(script):
