@@ -151,8 +151,8 @@ class AssetsBundle(object):
         Not really a full checksum.
         We compute a SHA1 on the rendered bundle + max linked files last_modified date
         """
-        self.files.sort()
-        self.remains.sort()
+        self.files = sorted(self.files, key=lambda k: k['url'])
+        self.remains = sorted(self.remains, key=lambda k: k['url'])
         check = json.dumps(self.files) + ",".join(self.remains) #+ str(self.last_modified)
         return hashlib.sha1(check).hexdigest()
 
