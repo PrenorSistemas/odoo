@@ -131,6 +131,7 @@ class Partner(models.Model, FormatAddress):
     _description = 'Partner'
     _name = "res.partner"
     _order = "display_name"
+    _inherit = ['mail.thread']
 
     def _default_category(self):
         return self.env['res.partner.category'].browse(self._context.get('category_id'))
@@ -138,14 +139,14 @@ class Partner(models.Model, FormatAddress):
     def _default_company(self):
         return self.env['res.company']._company_default_get('res.partner')
 
-    name = fields.Char(index=True)
+    name = fields.Char(index=True, track_visibility='onchange')
     display_name = fields.Char(compute='_compute_display_name', store=True, index=True)
-    date = fields.Date(index=True)
-    title = fields.Many2one('res.partner.title')
-    parent_id = fields.Many2one('res.partner', string='Related Company', index=True)
+    date = fields.Date(index=True, track_visibility='onchange')
+    title = fields.Many2one('res.partner.title', track_visibility='onchange')
+    parent_id = fields.Many2one('res.partner', string='Related Company', index=True, track_visibility='onchange')
     parent_name = fields.Char(related='parent_id.name', readonly=True, string='Parent name')
     child_ids = fields.One2many('res.partner', 'parent_id', string='Contacts', domain=[('active', '=', True)])  # force "active_test" domain to bypass _search() override
-    ref = fields.Char(string='Internal Reference', index=True)
+    ref = fields.Char(string='Internal Reference', index=True, track_visibility='onchange')
     lang = fields.Selection(_lang_get, string='Language', default=lambda self: self.env.lang,
                             help="If the selected language is loaded in the system, all documents related to "
                                  "this contact will be printed in this language. If not, it will be English.")
@@ -156,26 +157,26 @@ class Partner(models.Model, FormatAddress):
                                "render date and time values: your computer's timezone.")
     tz_offset = fields.Char(compute='_compute_tz_offset', string='Timezone offset', invisible=True)
     user_id = fields.Many2one('res.users', string='Salesperson',
-      help='The internal user that is in charge of communicating with this contact if any.')
+      help='The internal user that is in charge of communicating with this contact if any.', track_visibility='onchange')
     vat = fields.Char(string='TIN', help="Tax Identification Number. "
                                          "Fill it if the company is subjected to taxes. "
-                                         "Used by the some of the legal statements.")
-    bank_ids = fields.One2many('res.partner.bank', 'partner_id', string='Banks')
-    website = fields.Char(help="Website of Partner or Company")
-    comment = fields.Text(string='Notes')
+                                         "Used by the some of the legal statements.", track_visibility='onchange')
+    bank_ids = fields.One2many('res.partner.bank', 'partner_id', string='Banks', track_visibility='onchange')
+    website = fields.Char(help="Website of Partner or Company", track_visibility='onchange')
+    comment = fields.Text(string='Notes', track_visibility='onchange')
 
     category_id = fields.Many2many('res.partner.category', column1='partner_id',
-                                    column2='category_id', string='Tags', default=_default_category)
-    credit_limit = fields.Float(string='Credit Limit')
-    barcode = fields.Char(oldname='ean13')
-    active = fields.Boolean(default=True)
+                                    column2='category_id', string='Tags', default=_default_category, track_visibility='onchange')
+    credit_limit = fields.Float(string='Credit Limit', track_visibility='onchange')
+    barcode = fields.Char(oldname='ean13', track_visibility='onchange')
+    active = fields.Boolean(default=True, track_visibility='onchange')
     customer = fields.Boolean(string='Is a Customer', default=True,
-                               help="Check this box if this contact is a customer.")
+                               help="Check this box if this contact is a customer.", track_visibility='onchange')
     supplier = fields.Boolean(string='Is a Vendor',
                                help="Check this box if this contact is a vendor. "
-                               "If it's not checked, purchase people will not see it when encoding a purchase order.")
-    employee = fields.Boolean(help="Check this box if this contact is an Employee.")
-    function = fields.Char(string='Job Position')
+                               "If it's not checked, purchase people will not see it when encoding a purchase order.", track_visibility='onchange')
+    employee = fields.Boolean(help="Check this box if this contact is an Employee.", track_visibility='onchange')
+    function = fields.Char(string='Job Position', track_visibility='onchange')
     type = fields.Selection(
         [('contact', 'Contact'),
          ('invoice', 'Invoice address'),
@@ -184,20 +185,20 @@ class Partner(models.Model, FormatAddress):
          ("private", "Private Address"),
         ], string='Address Type',
         default='contact',
-        help="Used to select automatically the right address according to the context in sales and purchases documents.")
-    street = fields.Char()
-    street2 = fields.Char()
+        help="Used to select automatically the right address according to the context in sales and purchases documents.", track_visibility='onchange')
+    street = fields.Char(track_visibility='onchange')
+    street2 = fields.Char(track_visibility='onchange')
     zip = fields.Char(change_default=True)
-    city = fields.Char()
+    city = fields.Char(track_visibility='onchange')
     state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict')
     country_id = fields.Many2one('res.country', string='Country', ondelete='restrict')
-    email = fields.Char()
+    email = fields.Char(track_visibility='onchange')
     email_formatted = fields.Char(
         'Formatted Email', compute='_compute_email_formatted',
-        help='Format email address "Name <email@domain>"')
-    phone = fields.Char()
-    fax = fields.Char()
-    mobile = fields.Char()
+        help='Format email address "Name <email@domain>"', track_visibility='onchange')
+    phone = fields.Char(track_visibility='onchange')
+    fax = fields.Char(track_visibility='onchange')
+    mobile = fields.Char(track_visibility='onchange')
     is_company = fields.Boolean(string='Is a Company', default=False,
         help="Check if the contact is a company, otherwise it is a person")
     # company_type is only an interface field, do not use it in business logic
